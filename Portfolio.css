@@ -1,0 +1,977 @@
+/* ──────────────────────────────────────────────────────────
+   THEME VARIABLES
+────────────────────────────────────────────────────────── */
+:root {
+  --bg-color: #fff;
+  --text-color: #000;
+  --primary-color: #007bff;
+  --secondary-color: #343a40;
+  --light-bg: #f8f9fa;
+  --dark-bg: #121212;
+  --dark-card-bg: #2b2b2b;
+  --accent-color: #66f;
+  --font-family: 'Segoe UI', sans-serif;
+}
+
+/* ──────────────────────────────────────────────────────────
+   LIGHT & DARK MODE OVERRIDES
+────────────────────────────────────────────────────────── */
+body[data-theme="light"] {
+  --bg-color: #fff;
+  --text-color: #000;
+  --primary-color: #007bff;
+}
+
+body[data-theme="dark"] {
+  --bg-color: #121212;
+  --text-color: #f0f0f0;
+  --primary-color: #66f;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Ensure core backgrounds and text switch in dark mode */
+body[data-theme="dark"] .bg-white,
+body[data-theme="dark"] .bg-light,
+body[data-theme="dark"] section,
+body[data-theme="dark"] main,
+body[data-theme="dark"] nav,
+body[data-theme="dark"] footer {
+  background-color: var(--dark-card-bg) !important;
+  color: var(--text-color) !important;
+}
+
+body[data-theme="dark"] h1,
+body[data-theme="dark"] h2,
+body[data-theme="dark"] h3,
+body[data-theme="dark"] h4,
+body[data-theme="dark"] h5,
+body[data-theme="dark"] h6,
+body[data-theme="dark"] p,
+body[data-theme="dark"] a,
+body[data-theme="dark"] li,
+body[data-theme="dark"] label {
+  color: var(--text-color) !important;
+}
+
+/* ──────────────────────────────────────────────────────────
+   CORE LAYOUT
+────────────────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ──────────────────────────────────────────────────────────
+   THEME-SWITCH TOGGLE
+────────────────────────────────────────────────────────── */
+.theme-switch {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 60px;
+  height: 34px;
+  z-index: 1001;
+}
+
+.theme-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.theme-switch .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.theme-switch .slider:before {
+  content: "";
+  position: absolute;
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+.theme-switch input:checked + .slider {
+  background: #0fbcf9;
+}
+
+.theme-switch input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.theme-switch .slider:after {
+  content: "🌙";
+  position: absolute;
+  left: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  transition: 0.4s;
+}
+
+.theme-switch input:checked + .slider:after {
+  content: "☀️";
+  left: 31px;
+  top: 16px;
+}
+
+/* ──────────────────────────────────────────────────────────
+   COMPONENTS & UTILITIES
+────────────────────────────────────────────────────────── */
+
+/* Scroll Progress Bar */
+#scrollBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  width: 0;
+  background: var(--primary-color);
+  z-index: 9999;
+  transition: width 0.25s ease;
+}
+
+/* Sidebar */
+#sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100vh;
+  background: var(--secondary-color);
+  color: white;
+  padding-top: 60px;
+  transform: translateX(-250px);
+  opacity: 0.9;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  z-index: 999;
+}
+
+#sidebar.translate-on {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+#sidebar a.sidebar-link {
+  display: block;
+  padding: 15px;
+  color: white;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+#sidebar a.sidebar-link:hover,
+#sidebar a.sidebar-link:focus,
+#sidebar a.sidebar-link.active-link {
+  background: #495057;
+  outline: none;
+}
+
+/* Buttons */
+#sidebarToggle {
+  position: fixed;
+  top: 15px;
+  left: 20px;
+  z-index: 1001;
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+#backToTop {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--primary-color);
+  color: white;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 50%;
+  display: none;
+  transition: opacity 0.3s ease;
+  z-index: 1000;
+}
+
+/* Chatbot */
+.chatbot-modal {
+  position: fixed;
+  bottom: 70px;
+  right: 20px;
+  width: 300px;
+  height: 400px;
+  background: var(--bg-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  display: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 1001;
+}
+
+.chatbot-modal.show {
+  display: block;
+  opacity: 1;
+}
+
+#chatbotBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+/* Main & Sections */
+main.content {
+  margin-left: 0;
+  padding: 20px;
+  transition: margin-left 0.5s ease;
+}
+
+section {
+  padding: 60px 0;
+}
+
+/* Cards Hover */
+.skill-card:hover,
+.testimonial-card:hover,
+.achievement-card:hover,
+.project-card:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Dark-mode overrides for cards */
+body[data-theme="dark"] .card,
+body[data-theme="dark"] .achievement-card,
+body[data-theme="dark"] .testimonial-card {
+  background-color: var(--dark-card-bg) !important;
+  color: var(--text-color) !important;
+}
+
+/* Ensure the search/filter/sort controls fill their columns */
+#projectSearch,
+#projectFilter,
+#projectSort {
+  width: 100%;
+}
+
+/* Card container tweaks */
+.project-card .card {
+  border-radius: 1rem;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Lift & shadow on hover or focus */
+.project-card .card:hover,
+.project-card .card:focus {
+  transform: translateY(-5px);
+  box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.15);
+}
+
+/* Card header/title spacing */
+.project-card .card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Button spacing */
+.project-card .card-body .btn {
+  margin-right: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+/* “No projects found” message styling */
+#noProjectsMsg {
+  margin-top: 1rem;
+}
+
+/* Animate.css overrides (optional tweaks) */
+.animate__fadeIn {
+  --animate-duration: 0.8s;
+}
+
+.animate__fadeInUp {
+  --animate-duration: 1s;
+}
+
+#projectGallery {
+    grid-template-columns: 1fr;
+  }
+
+#projectGallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+/* Projects BG */
+#projects {
+  position: relative;
+  background: url('images/project-bg.jpg') center/cover fixed no-repeat;
+  color: #fff;
+  overflow: hidden;
+}
+
+#projects::before {
+  content: "";
+  position: absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 0;
+}
+
+#projects .container {
+  position: relative;
+  z-index: 1;
+}
+
+body[data-theme="dark"] #projects {
+  background-image: url('images/project-bg-dark.jpg');
+}
+
+/* ────────────── SKILLS TOGGLE (PILL SLIDER) ────────────── */
+/* ===============================
+   Skills Section — Full CSS
+   =============================== */
+
+/* ────────────── VARIABLES ────────────── */
+:root {
+  --bg-color: rgba(255,255,255,0.6);
+  --bg-dark: rgba(0,0,0,0.6);
+  --text: #333;
+  --text-light: #fff;
+  --primary: #4f46e5;
+  --transition-speed: 0.3s;
+}
+
+body[data-theme="dark"] {
+  --bg-color: var(--bg-dark);
+  --text: var(--text-light);
+}
+
+/* ────────────── SECTION BACKDROP ────────────── */
+#skills {
+  background: var(--bg-color);
+  backdrop-filter: blur(10px);
+  padding: 3rem 0;
+}
+
+/* ────────────── PILL-SLIDER TOGGLE (SLIM VERSION) ────────────── */
+.skills-toggle {
+  --count: 7;
+  --pill-index: 0;
+  display: flex;
+  max-width: 960px;
+  margin: 0 auto 1.5rem;
+  background: rgba(0,0,0,0.1);
+  border-radius: 2rem;
+  position: relative;
+  height: 3rem;
+}
+
+.skills-toggle::before {
+  content: "";
+  position: absolute;
+  top: 0.3rem;
+  bottom: 0.3rem;
+  left: calc(var(--pill-index) * (100% / var(--count)));
+  width: calc(100% / var(--count));
+  background: var(--primary);
+  border-radius: 1.7rem;
+  transition: left 0.3s ease;
+  z-index: 0;
+}
+
+.toggle-btn {
+  flex: 1;
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+  line-height: 3rem;
+  text-align: center;
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--text);
+  position: relative;
+  z-index: 1;
+  transition: color var(--transition-speed) ease;
+}
+
+.toggle-btn[aria-selected="true"] {
+  color: var(--text-light);
+}
+
+/* ────────────── GRID LAYOUT ────────────── */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(120px, 1fr));
+  gap: 2rem;
+  justify-items: center;
+  margin: 0 auto;
+  max-width: calc((120px * 8) + (2rem * 6));
+}
+
+/* ────────────── SKILL CARD ────────────── */
+.skill-card {
+  background: var(--bg-color);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 1rem;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  transition:
+    transform var(--transition-speed) ease,
+    box-shadow var(--transition-speed) ease,
+    background var(--transition-speed) ease;
+  outline-offset: 4px;
+  color: var(--text);
+}
+
+.skill-card:hover,
+.skill-card:focus {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  outline: none;
+}
+
+/* ────────────── CIRCULAR ICON CHART ────────────── */
+.skill-chart {
+  --clr: var(--primary);
+  --pct: 0;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: conic-gradient(var(--clr) calc(var(--pct) * 1%), #ddd 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  transition: background 1.2s ease-in-out;
+}
+
+.skill-chart i {
+  font-size: 2rem;
+  color: var(--text);
+  transition: color var(--transition-speed) ease;
+}
+
+/* ────────────── BRAND COLORS ────────────── */
+.skill-chart.html           { --clr: #E34F26; }
+
+.skill-chart.css            { --clr: #264DE4; }
+
+.skill-chart.js             { --clr: #F7DF1E; }
+
+.skill-chart.bootstrap      { --clr: #563D7C; }
+
+.skill-chart.react          { --clr: #61DAFB; }
+
+.skill-chart.angular        { --clr: #DD0031; }
+
+.skill-chart.python         { --clr: #306998; }
+
+.skill-chart.node           { --clr: #68A063; }
+
+.skill-chart.spring         { --clr: #6DB33F; }
+
+.skill-chart.microservices  { --clr: #00A3E0; }
+
+.skill-chart.rest           { --clr: #FF6F00; }
+
+.skill-chart.sql            { --clr: #00758F; }
+
+.skill-chart.mongodb        { --clr: #47A248; }
+
+.skill-chart.oracle         { --clr: #F80000; }
+
+.skill-chart.aws            { --clr: #FF9900; }
+
+.skill-chart.azure          { --clr: #0089D6; }
+
+.skill-chart.gcp            { --clr: #4285F4; }
+
+.skill-chart.docker         { --clr: #2496ED; }
+
+.skill-chart.kubernetes     { --clr: #326CE5; }
+
+.skill-chart.terraform      { --clr: #623CE4; }
+
+.skill-chart.kafka          { --clr: #61DAFB; }
+
+.skill-chart.linux          { --clr: #FCC624; }
+
+.skill-chart.agile          { --clr: #F57C00; }
+
+.skill-chart.cicd           { --clr: #E64A19; }
+
+.skill-chart.tdd            { --clr: #4CAF50; }
+
+.skill-chart.oauth          { --clr: #427FED; }
+
+.skill-chart.jwt            { --clr: #DBAB09; }
+
+/* ────────────── TEXT STYLES ────────────── */
+.skill-name {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.skill-value {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: var(--text);
+}
+
+/* ────────────── DARK MODE OVERRIDES ────────────── */
+body[data-theme="dark"] .skill-chart i {
+  color: var(--text-light) !important;
+}
+
+.skill-chart {
+    width: 70px;
+    height: 70px;
+  }
+
+.skills-grid {
+    gap: 1.5rem;
+  }
+
+/* ────────────── PROGRESS BAR STYLING ────────────── */
+.progress {
+  height: 20px;
+  margin-top: 10px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress > .progress-bar {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  color: #fff !important;
+  font-size: 1.2rem !important;
+  font-weight: bold !important;
+  transition: width 1s ease-in-out;
+  width: 0;
+}
+
+body[data-theme="dark"] .progress > .progress-bar {
+  color: #fff !important;
+}
+
+/* ────────────── CERTIFICATE MODAL OVERRIDES ────────────── */
+body[data-theme="dark"] .modal-content {
+  background-color: var(--dark-card-bg);
+  color: var(--text-color);
+}
+
+/* ────────────── SKILL CARD ────────────── */
+.skill-card {
+  background: var(--bg-color);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  transition:
+    transform var(--transition-speed) ease,
+    box-shadow var(--transition-speed) ease,
+    background var(--transition-speed) ease;
+  outline-offset: 4px;
+  color: var(--text);
+}
+
+.skill-card:hover,
+.skill-card:focus {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  outline: none;
+}
+
+/* ────────────── CIRCULAR ICON CHART ────────────── */
+.skill-chart {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--clr);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  transition: background var(--transition-speed) ease;
+}
+
+.skill-chart.kafka          { --clr: #231F20; }
+
+/* Progress Bar Styling */
+.progress {
+  height: 20px;
+  margin-top: 10px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Certificate Modal */
+body[data-theme="dark"] .modal-content {
+  background-color: var(--dark-card-bg);
+  color: var(--text-color);
+}
+
+/* Carousel controls color by theme */
+body[data-theme="dark"] .carousel-control-prev-icon,
+body[data-theme="dark"] .carousel-control-next-icon {
+  filter: invert(0) !important;
+}
+
+body[data-theme="light"] .carousel-control-prev-icon,
+body[data-theme="light"] .carousel-control-next-icon {
+  filter: invert(1) !important;
+}
+
+/* Responsive & Utility */
+.ratio { border: 1px solid #ccc; border-radius: 8px; }
+
+.testimonial-card { border: none; border-radius: 8px; }
+
+.testimonial-headshot { width: 50px; height: 50px; object-fit: cover; border-radius: 50%; border: 2px solid #ccc; }
+
+.testimonial-card .card-body { display: flex; flex-direction: column; }
+
+.carousel-img { max-height: 500px; object-fit: contain; width: 100%; }
+
+.headshot-container { text-align: center; }
+
+.headshot { width: 200px; height: 200px; object-fit: cover; border: 3px solid var(--primary-color); border-radius: 50%; }
+
+button:focus, a:focus, input:focus, select:focus, textarea:focus { outline: 2px dashed var(--primary-color); outline-offset: 2px; }
+
+/* Lightbox styles */
+.lightbox-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0.3s;
+  visibility: hidden;
+}
+
+.lightbox-overlay.active {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.lightbox-overlay img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 8px;
+}
+
+.lightbox-overlay .close-lightbox {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 2rem;
+  color: #fff;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Gallery grid thumbnails */
+#galleryGrid figure {
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  margin: 0;
+}
+
+#galleryGrid figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Lightbox/video modals fit */
+#lightboxModal .modal-dialog,
+#videoModal .modal-dialog {
+  max-width: 90vw;
+  margin: 1rem auto;
+}
+
+#lightboxModal .modal-body,
+#videoModal .modal-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  max-height: 80vh;
+}
+
+#lightboxImg,
+#lightboxVideo {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* ==========================================================================
+   Timeline Section Styles
+   ========================================================================== 
+/* Light mode defaults */
+:root {
+  --bg-light:       #f8f9fa;
+  --card-bg:        #ffffff;
+  --text-dark:      #343a40;
+  --text-muted:     #6c757d;
+  --primary:        #0d6efd;
+  --primary-rgb:    13, 110, 253;
+  --box-shadow:     rgba(0,0,0,0.05) 0px 0.25rem 0.5rem;
+}
+
+/* Dark mode overrides */
+body[data-theme="dark"] {
+  --bg-light:       #2b2b2b;
+  --card-bg:        #383838;
+  --text-dark:      #f1f1f1;
+  --text-muted:     #adb5bd;
+  --primary:        #0d6efd;
+  --primary-rgb:    102, 175, 233;
+  --box-shadow:     rgba(0,0,0,0.7) 0px 0.25rem 0.5rem;
+}
+
+/* ==========================================================================
+   Segmented Toggle Control (centered)
+   ========================================================================== */
+   .timeline-toggle {
+    position: relative;
+    display: flex;                 /* switch to flex for easy centering */
+    justify-content: center;       /* center its children horizontally */
+    margin: 1.5rem auto;           /* auto left/right margins to center the block */
+    background-color: var(--bg-light);
+    border-radius: 2rem;
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+    user-select: none;
+    width: fit-content;            /* shrink-wrap to its contents */
+  }
+
+/* pill background */
+  .timeline-toggle::before {
+    content: "";
+    position: absolute;
+    top: 0.2rem;
+    bottom: 0.2rem;
+    left: var(--pill-left);
+    width: 50%;
+    background-color: var(--primary);
+    border-radius: 1.8rem;
+    transition: left 0.3s ease;
+    z-index: 0;
+  }
+
+/* your toggle buttons */
+  .timeline-toggle .toggle-btn {
+    position: relative;
+    flex: 1;
+    padding: 0.5rem 1.5rem;
+    background: none;
+    border: none;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    cursor: pointer;
+    z-index: 1;
+    transition: color 0.3s ease;
+  }
+
+.toggle-btn:hover {
+  color: var(--text-dark);
+}
+
+.toggle-btn[aria-selected="true"] {
+  color: #fff;
+}
+
+/* ==========================================================================
+   Timeline Section Styles
+   ========================================================================== */
+
+#timeline {
+  background-color: var(--bg-light);
+  padding: 3rem 0;
+  position: relative;
+}
+
+#timeline h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+#timeline .timeline-line {
+  position: absolute;
+  left: 50%;
+  top: 2rem;
+  bottom: 2rem;
+  width: 4px;
+  background-color: var(--primary);
+  transform: translateX(-50%);
+  z-index: 1;
+  border-radius: 2px;
+}
+
+.timeline-section {
+  position: relative;
+  padding: 0 1rem;
+}
+
+.timeline-item {
+  position: relative;
+  width: 45%;
+  padding: 1rem 1.5rem;
+  margin-bottom: 2rem;
+  background-color: var(--card-bg);
+  border-radius: 0.5rem;
+  box-shadow: var(--box-shadow);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  z-index: 2;
+}
+
+/* Alternate items left/right */
+.section-education .timeline-item:nth-child(odd),
+.section-experience .timeline-item:nth-child(odd) {
+  left: 0;
+}
+
+.section-education .timeline-item:nth-child(even),
+.section-experience .timeline-item:nth-child(even) {
+  left: 55%;
+}
+
+.timeline-item .badge {
+  font-size: 0.85rem;
+  padding: 0.5em 0.75em;
+}
+
+.timeline-item h5 {
+  margin-top: 0.25rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.timeline-item p {
+  margin-bottom: 0;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.timeline-item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.d-none {
+  display: none !important;
+}
+
+#timeline .timeline-line {
+    left: 8px;
+  }
+
+.timeline-item {
+    width: calc(100% - 2.5rem);
+    left: 2rem !important;
+    padding-left: 2.5rem;
+  }
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -1.5rem;
+    top: 1.25rem;
+    width: 0.75rem;
+    height: 0.75rem;
+    background-color: var(--primary);
+    border-radius: 50%;
+  }
+
+#sidebar { width: 220px; transform: translateX(-220px); }
+
+#sidebar.translate-on { transform: translateX(0); }
+
+#sidebar { width: 200px; transform: translateX(-200px); }
+
+main.content { padding: 10px; }
+
+h1 { font-size: 1.75rem; }
+
+h2 { font-size: 1.5rem; }
+
+h3 { font-size: 1.25rem; }
+
+/* Sidebar Logo & Links */
+#sidebar img.aaruush-logo { width: 30px; height: 30px; margin-right: 8px; }
+
+.aaruush-link:hover,
+.aaruush-link:focus { color: #0056b3; }
+
+.timeline-item.timeline-hidden {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* Make body span at least the full viewport height, with header+main growing and footer fixed */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Main content will expand to fill available space */
+main.content {
+  flex: 1 0 auto;
+}
+
+/* Footer will stay at the bottom */
+footer {
+  flex-shrink: 0;
+}

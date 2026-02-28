@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Explore the projects, skills, and achievements of Veera Venkata Ganesh, a passionate web developer and data enthusiast." />
+  <meta name="keywords" content="portfolio, web developer, AI, data mining, George Mason University" />
+  <meta name="author" content="Veera Venkata Ganesh Nurukurthi" />
+  <title>Veera Venkata Ganesh Nurukurthi - Portfolio</title>
+
+  <!-- SEO / Social Preview -->
+  <meta property="og:title" content="Veera Venkata Ganesh - Portfolio" />
+  <meta property="og:description" content="Explore the projects, skills, and achievements of Veera Venkata Ganesh, a passionate web developer and data enthusiast." />
+  <meta property="og:image" content="images/portfolio-preview.jpg" />
+  <meta property="og:url" content="https://your-portfolio-link.com" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Content Security Policy -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; img-src 'self' data:; font-src 'self' https://cdnjs.cloudflare.com;" />
+
+  <!-- PWA: Manifest & Apple-Specific Tags -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#007bff" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <link rel="apple-touch-icon" href="images/icons-192.png" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.ico" />
+
+  <!-- CSS Libraries -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="Portfolio.css" />
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Veera Venkata Ganesh Nurukurthi",
+      "url": "https://your-portfolio-link.com",
+      "jobTitle": "Web Developer & Data Enthusiast",
+      "sameAs": [
+        "https://www.linkedin.com/in/veera-venkata-ganesh-nurukurthi",
+        "https://github.com/NVEERAVENKATAGANESH"
+      ]
+    }
+  </script>
+
+  <style>
+    /* Inline custom style adjustments */
+    .carousel-img {
+      max-height: 500px;
+      object-fit: contain;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <!-- Scroll Progress Bar -->
+  <div id="scrollBar" aria-hidden="true"></div>
+
+  <!-- Sidebar Toggle and Active Indicator -->
+  <button id="sidebarToggle" class="btn btn-primary" aria-label="Toggle sidebar menu">
+    <i class="fas fa-bars"></i>
+  </button>
+
+
+  <!-- Dark/Light Theme Switch -->
+  <div class="theme-switch">
+    <label>
+      <input type="checkbox" id="theme-toggle" />
+      <span class="slider"></span>
+    </label>
+  </div>
+  <!-- Chatbot Button -->
+  <button id="chatbotBtn" class="btn btn-primary" aria-label="Open chatbot">
+    <i class="fas fa-comments"></i>
+  </button>
+
+  <!-- Chatbot Modal -->
+  <div class="chatbot-modal" id="chatbotModal" role="dialog" aria-modal="true" aria-labelledby="chatbotLabel">
+    <iframe src="https://example-chatbot.com/embed" title="Chatbot interface">
+      <p>Your browser does not support iframes. Chat with me directly via email or phone!</p>
+    </iframe>
+  </div>
+
+ <!-- Sidebar Navigation -->
+<nav id="sidebar" aria-label="Sidebar Navigation">
+  <a href="#home" class="sidebar-link"><i class="fas fa-home me-2"></i> Home</a>
+  <a href="#about" class="sidebar-link"><i class="fas fa-user me-2"></i> About Me</a>
+  <a href="#timeline" class="sidebar-link"><i class="fas fa-chart-line me-2"></i> My Journey </a>
+  <a href="#skills" class="sidebar-link"><i class="fas fa-tools me-2"></i> Skills</a>
+  <a href="#projects" class="sidebar-link"><i class="fas fa-code me-2"></i> Projects</a>
+  <a href="#achievements" class="sidebar-link"><i class="fas fa-award me-2"></i> Achievements</a>
+  <a href="#testimonials" class="sidebar-link"><i class="fas fa-quote-left me-2"></i> Testimonials</a>
+  <a href="#gallery" class="sidebar-link"><i class="fas fa-images me-2"></i> Gallery</a>
+  <a href="#contact" class="sidebar-link"><i class="fas fa-paper-plane me-2"></i> Contact</a>
+<a href="Ganesh_Resume.pdf" class="sidebar-link"><i class="fas fa-file-alt me-2"></i> View Resume</a>
+
+
+  <hr class="text-white mx-3" />
+
+  <a href="https://www.linkedin.com/in/veera-venkata-ganesh-nurukurthi-437195226/" target="_blank" rel="noopener" class="sidebar-link"><i class="fab fa-linkedin me-2"></i> LinkedIn</a>
+  <a href="https://github.com/NVEERAVENKATAGANESH" target="_blank" rel="noopener" class="sidebar-link"><i class="fab fa-github me-2"></i> GitHub</a>
+  <a href="https://22nd.aaruush.org" target="_blank" rel="noopener" class="sidebar-link"><img src="images/Aaruush-logo.png" alt="Aaruush Logo" class="aaruush-logo me-2" />Aaruush</a>
+</nav>
+
+
+  <!-- Main Content -->
+  <main class="content">
+    <!-- Home Section -->
+    <section id="home" class="vh-100 d-flex flex-column justify-content-center align-items-center text-center animate__animated animate__fadeIn" role="banner">
+      <div class="headshot-container mb-3">
+        <img src="images/Headshot.jpg" alt="Headshot of Veera Venkata Ganesh" class="headshot" />
+      </div>
+      <h1 class="display-4 fw-bold">Hi, I'm <span class="text-primary">Veera Venkata Ganesh</span></h1>
+      <h3 class="mt-3">I'm a <span id="typed" class="text-success"></span></h3>
+      <p class="mt-4 w-75 mx-auto">
+        I design and develop web solutions, build intelligent systems, and love exploring data.
+        Welcome to my portfolio!
+      </p>
+      <a href="#contact" class="btn btn-lg btn-success mt-4">Hire Me</a>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-5 bg-white animate__animated animate__fadeInUp">
+      <div class="container">
+        <h2 class="text-center mb-4">
+          <i class="fas fa-user me-2"></i> About Me
+        </h2>
+        <div class="row justify-content-center">
+          <div class="col-md-8">
+            <p>
+              I’m Veera Venkata Ganesh Nurukurthi, a passionate web developer and data enthusiast.
+              Currently pursuing my Master's in Computer Science at George Mason University,
+              I blend creativity with logic to create impactful digital experiences.
+            </p>
+            <p>
+              With a strong foundation in AI and Data Mining, I aim to build intelligent, user-friendly
+              applications. I’m also actively involved in organizing tech events and leading student
+              communities.
+            </p>
+            <p>Let’s collaborate and create something amazing!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<!-- Timeline Section -->
+<section id="timeline" class="py-5 bg-light" role="region" aria-labelledby="timeline-heading">
+  <div class="container">
+    <h2 id="timeline-heading" class="text-center mb-5">
+      <i class="fas fa-chart-line me-2"></i> My Journey
+    </h2>
+
+    <!-- Toggle Buttons -->
+    <div class="timeline-toggle" data-active="education" role="tablist" aria-label="Timeline toggle">
+      <button class="toggle-btn" data-section="education" role="tab" aria-selected="true">
+        Education
+      </button>
+      <button class="toggle-btn" data-section="experience" role="tab" aria-selected="false">
+        Experience
+      </button>
+    </div>
+    
+
+    <!-- Timeline Container -->
+    <div class="position-relative">
+      <div class="timeline-line"></div>
+
+      <!-- Education Entries -->
+      <div class="timeline-section section-education">
+        <div class="timeline-item mb-5">
+          <span class="badge bg-primary mb-2">Aug 2023 – May 2025</span>
+          <h5 class="fw-bold">M.Sc. in Computer Science</h5>
+          <p class="mb-1"><strong>George Mason University</strong>, Fairfax, VA</p>
+          <p>Specialized in AI &amp; Data Mining. Completed advanced coursework in Machine Learning, Data Visualization, and Statistical Analysis.</p>
+        </div>
+        <div class="timeline-item">
+          <span class="badge bg-primary mb-2">Jun 2019 – May 2023</span>
+          <h5 class="fw-bold">B.Tech in Computer Science Engineering</h5>
+          <p class="mb-1"><strong>SRM Institute of Science &amp; Technology</strong>, Chennai, India</p>
+          <p>Focused on AI, Computer Vision, and Web Development. Graduated with First Class Honors.</p>
+        </div>
+      </div>
+
+      <!-- Experience Entries (hidden by default) -->
+      <div class="timeline-section section-experience d-none">
+        <div class="timeline-item mb-5">
+          <span class="badge bg-primary mb-2">Jun 2019 – May 2023</span>
+          <h5 class="fw-bold">Organizer, Operations &amp; Resource Management</h5>
+          <p class="mb-1"><strong>Aaruush Techno-Management Fest</strong>, SRM IST, Chennai</p>
+          <p>Led 300+ volunteers to plan and execute 60+ technical events, overseeing budgeting, logistics, and stakeholder coordination.</p>
+        </div>
+        <div class="timeline-item mb-5">
+          <span class="badge bg-primary mb-2">Feb 2021 – Jan 2023</span>
+          <h5 class="fw-bold">Local Lead, NASA Space Apps Challenge</h5>
+          <p class="mb-1"><strong>SRM IST</strong>, Chennai, India</p>
+          <p>Coordinated recruitment and mentorship for NASA’s global hackathon; earned an honorable nomination for our team’s solution.</p>
+        </div>
+        <div class="timeline-item">
+          <span class="badge bg-primary mb-2">Jun 2019 – May 2023</span>
+          <h5 class="fw-bold">Committee Head, Milan Cultural Fest</h5>
+          <p class="mb-1"><strong>SRM IST</strong>, Chennai, India</p>
+          <p>Held leadership roles across Hospitality, Operations, Discipline, and Creative Arts for the Directorate of Student Affairs.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section id="skills" aria-labelledby="skills-heading" class="py-5">
+  <div class="container text-center">
+    <h2 id="skills-heading" class="mb-4">
+      <i class="fas fa-tools me-2" aria-hidden="true"></i> My Skills
+    </h2>
+
+    <!-- Pill-Slider Toggle -->
+    <div class="skills-toggle mb-5" role="tablist" aria-label="Filter skills">
+      <button class="toggle-btn" role="tab" aria-selected="true" data-cat="all">All</button>
+      <button class="toggle-btn" role="tab" aria-selected="false" data-cat="frontend">Frontend</button>
+      <button class="toggle-btn" role="tab" aria-selected="false" data-cat="backend">Backend</button>
+      <button class="toggle-btn" role="tab" aria-selected="false" data-cat="databases">Databases</button>
+      <button class="toggle-btn" role="tab" aria-selected="false" data-cat="cloud">Cloud</button>
+      <button class="toggle-btn" role="tab" aria-selected="false" data-cat="devops">DevOps</button>
+      <button class="toggle-btn" role="tab" aria-selected="false" data-cat="methodologies">Methodologies</button>
+    </div>
+
+    <!-- Skills Grid -->
+    <div class="skills-grid">
+      <!-- Frontend -->
+      <article class="skill-card" data-cat="frontend" tabindex="0">
+        <div class="skill-chart html"><i class="fab fa-html5"></i></div>
+        <h3 class="skill-name">HTML5</h3>
+      </article>
+      <article class="skill-card" data-cat="frontend" tabindex="0">
+        <div class="skill-chart css"><i class="fab fa-css3-alt"></i></div>
+        <h3 class="skill-name">CSS3</h3>
+      </article>
+      <article class="skill-card" data-cat="frontend" tabindex="0">
+        <div class="skill-chart js"><i class="fab fa-js-square"></i></div>
+        <h3 class="skill-name">JavaScript</h3>
+      </article>
+      <article class="skill-card" data-cat="frontend" tabindex="0">
+        <div class="skill-chart bootstrap"><i class="fab fa-bootstrap"></i></div>
+        <h3 class="skill-name">Bootstrap</h3>
+      </article>
+      <article class="skill-card" data-cat="frontend" tabindex="0">
+        <div class="skill-chart react"><i class="fab fa-react"></i></div>
+        <h3 class="skill-name">React</h3>
+      </article>
+      <article class="skill-card" data-cat="frontend" tabindex="0">
+        <div class="skill-chart angular"><i class="fab fa-angular"></i></div>
+        <h3 class="skill-name">Angular</h3>
+      </article>
+
+      <!-- Backend -->
+      <article class="skill-card" data-cat="backend" tabindex="0">
+        <div class="skill-chart python"><i class="fab fa-python"></i></div>
+        <h3 class="skill-name">Python</h3>
+      </article>
+      <article class="skill-card" data-cat="backend" tabindex="0">
+        <div class="skill-chart node"><i class="fab fa-node-js"></i></div>
+        <h3 class="skill-name">Node.js</h3>
+      </article>
+      <article class="skill-card" data-cat="backend" tabindex="0">
+        <div class="skill-chart spring"><i class="fas fa-leaf"></i></div>
+        <h3 class="skill-name">Spring Boot</h3>
+      </article>
+      <article class="skill-card" data-cat="backend" tabindex="0">
+        <div class="skill-chart microservices"><i class="fas fa-project-diagram"></i></div>
+        <h3 class="skill-name">Microservices</h3>
+      </article>
+      <article class="skill-card" data-cat="backend" tabindex="0">
+        <div class="skill-chart rest"><i class="fas fa-code-branch"></i></div>
+        <h3 class="skill-name">REST APIs</h3>
+      </article>
+
+      <!-- Databases -->
+      <article class="skill-card" data-cat="databases" tabindex="0">
+        <div class="skill-chart sql"><i class="fas fa-database"></i></div>
+        <h3 class="skill-name">SQL</h3>
+      </article>
+      <article class="skill-card" data-cat="databases" tabindex="0">
+        <div class="skill-chart mongodb"><i class="fas fa-leaf"></i></div>
+        <h3 class="skill-name">MongoDB</h3>
+      </article>
+      <article class="skill-card" data-cat="databases" tabindex="0">
+        <div class="skill-chart oracle"><i class="fas fa-circle"></i></div>
+        <h3 class="skill-name">Oracle</h3>
+      </article>
+
+      <!-- Cloud -->
+      <article class="skill-card" data-cat="cloud" tabindex="0">
+        <div class="skill-chart aws"><i class="fab fa-aws"></i></div>
+        <h3 class="skill-name">AWS</h3>
+      </article>
+      <article class="skill-card" data-cat="cloud" tabindex="0">
+        <div class="skill-chart azure"><i class="fab fa-microsoft"></i></div>
+        <h3 class="skill-name">Azure</h3>
+      </article>
+      <article class="skill-card" data-cat="cloud" tabindex="0">
+        <div class="skill-chart gcp"><i class="fab fa-google"></i></div>
+        <h3 class="skill-name">GCP</h3>
+      </article>
+
+      <!-- DevOps & Tools -->
+      <article class="skill-card" data-cat="devops" tabindex="0">
+        <div class="skill-chart docker"><i class="fab fa-docker"></i></div>
+        <h3 class="skill-name">Docker</h3>
+      </article>
+      <article class="skill-card" data-cat="devops" tabindex="0">
+        <div class="skill-chart kubernetes"><i class="fas fa-seedling"></i></div>
+        <h3 class="skill-name">Kubernetes</h3>
+      </article>
+      <article class="skill-card" data-cat="devops" tabindex="0">
+        <div class="skill-chart terraform"><i class="fas fa-cloud"></i></div>
+        <h3 class="skill-name">Terraform</h3>
+      </article>
+      <article class="skill-card" data-cat="devops" tabindex="0">
+        <div class="skill-chart kafka"><i class="fas fa-stream"></i></div>
+        <h3 class="skill-name">Kafka</h3>
+      </article>
+      <article class="skill-card" data-cat="devops" tabindex="0">
+        <div class="skill-chart linux"><i class="fab fa-linux"></i></div>
+        <h3 class="skill-name">Linux</h3>
+      </article>
+
+      <!-- Methodologies -->
+      <article class="skill-card" data-cat="methodologies" tabindex="0">
+        <div class="skill-chart agile"><i class="fas fa-running"></i></div>
+        <h3 class="skill-name">Agile</h3>
+      </article>
+      <article class="skill-card" data-cat="methodologies" tabindex="0">
+        <div class="skill-chart cicd"><i class="fas fa-sync-alt"></i></div>
+        <h3 class="skill-name">CI/CD</h3>
+      </article>
+      <article class="skill-card" data-cat="methodologies" tabindex="0">
+        <div class="skill-chart tdd"><i class="fas fa-vial"></i></div>
+        <h3 class="skill-name">TDD</h3>
+      </article>
+      <article class="skill-card" data-cat="methodologies" tabindex="0">
+        <div class="skill-chart oauth"><i class="fas fa-lock"></i></div>
+        <h3 class="skill-name">OAuth2.0</h3>
+      </article>
+      <article class="skill-card" data-cat="methodologies" tabindex="0">
+        <div class="skill-chart jwt"><i class="fas fa-key"></i></div>
+        <h3 class="skill-name">JWT</h3>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Projects Section -->
+<section id="projects" class="py-5 animate__animated animate__fadeInUp">
+  <div class="container">
+    <h2 class="text-center mb-4">
+      <i class="fas fa-code me-2"></i> Projects
+    </h2>
+
+    <!-- Search, Filter & Sort Row -->
+    <div class="row mb-4 justify-content-center">
+      <div class="col-md-3 mb-2">
+        <input type="text" id="projectSearch" class="form-control" placeholder="Search projects..." aria-label="Search for projects" />
+      </div>
+      <div class="col-md-3 mb-2">
+        <select id="projectFilter" class="form-select" aria-label="Filter projects by category">
+          <option value="all">All</option>
+          <option value="ai">AI</option>
+          <option value="frontend">Frontend</option>
+          <option value="graphics">Graphics</option>
+          <option value="hci">HCI</option>
+          <option value="web">Web</option>
+        </select>
+      </div>
+      <div class="col-md-3 mb-2">
+        <select id="projectSort" class="form-select" aria-label="Sort projects">
+          <option value="none">Sort</option>
+          <option value="az">A – Z</option>
+          <option value="za">Z – A</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- No-results message -->
+    <div class="alert alert-warning text-center" id="noProjectsMsg" role="status" aria-live="polite" style="display: none;">
+      No projects found. Try adjusting your search, filter, or sort.
+    </div>
+
+    <!-- Project cards container -->
+    <div class="row g-4" id="projectGallery" role="region" aria-label="Project Gallery">
+
+      <!-- Lane Line Detection -->
+      <div class="col-sm-6 col-md-3 project-card" data-category="ai">
+        <div class="card h-100 shadow animate__animated animate__fadeIn" tabindex="0">
+          <div class="card-body">
+            <h5 class="card-title">Lane Line Detection</h5>
+            <p class="card-text">Implemented a computer vision system using OpenCV to detect lane lines from vehicle dashcam footage. Applied Canny Edge Detection and Hough Transform to highlight lanes on California highway videos.</p>
+            <div class="d-flex align-items-center mt-3">
+              <a href="#" class="btn btn-sm btn-primary" target="_blank" aria-label="View demo of Lane Line Detection">Live Demo</a>
+              <a href="#" class="btn btn-sm btn-outline-dark" target="_blank" aria-label="View source code of Lane Line Detection">Source</a>
+              <a href="reports/lane_line_detection_report.pdf" class="btn btn-sm btn-outline-info ms-2" target="_blank" aria-label="View project report PDF">Report</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Online Doctor Consultancy -->
+      <div class="col-sm-6 col-md-3 project-card" data-category="web">
+        <div class="card h-100 shadow animate__animated animate__fadeIn" tabindex="0">
+          <div class="card-body">
+            <h5 class="card-title">Online Doctor Consultancy</h5>
+            <p class="card-text">Developed a web-based healthcare portal providing instant access to primary consultation and emergency triage services. Designed and implemented a responsive UI using HTML, CSS, and JavaScript to streamline patient interaction and data entry.</p>
+            <div class="d-flex align-items-center mt-3">
+              <a href="#" class="btn btn-sm btn-primary" target="_blank" aria-label="View demo of Online Doctor Consultancy">Live Demo</a>
+              <a href="#" class="btn btn-sm btn-outline-dark" target="_blank" aria-label="View source code of Online Doctor Consultancy">Source</a>
+              <a href="reports/online_doctor_consultancy_report.pdf" class="btn btn-sm btn-outline-info ms-2" target="_blank" aria-label="View project report PDF">Report</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Diabetes Prediction Using Machine Learning -->
+      <div class="col-sm-6 col-md-3 project-card" data-category="ai">
+        <div class="card h-100 shadow animate__animated animate__fadeIn" tabindex="0">
+          <div class="card-body">
+            <h5 class="card-title">Diabetes Prediction Using Machine Learning</h5>
+            <p class="card-text">Trained a classification model on the Pima Indians Diabetes Dataset to predict diabetic outcomes. Integrated a web-based input form to feed patient data into the model for real-time predictions.</p>
+            <div class="d-flex align-items-center mt-3">
+              <a href="#" class="btn btn-sm btn-primary" target="_blank" aria-label="View demo of Diabetes Prediction">Live Demo</a>
+              <a href="#" class="btn btn-sm btn-outline-dark" target="_blank" aria-label="View source code of Diabetes Prediction">Source</a>
+              <a href="images/projects/diabetes_report.pdf" class="btn btn-sm btn-outline-info ms-2" target="_blank" aria-label="View project report PDF">Report</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+  <!-- Deep Learning on Traffic Prediction Methods -->
+  <div class="col-sm-6 col-md-3 project-card" data-category="dl">
+    <div class="card h-100 shadow animate__animated animate__fadeIn" tabindex="0">
+      <div class="card-body">
+        <h5 class="card-title">Traffic Prediction with Deep Learning</h5>
+        <p class="card-text">Conducted an in-depth analysis of deep learning techniques for traffic flow prediction. Compared LSTM, GRU, and CNN-based models and proposed future directions using hybrid architectures.</p>
+        <div class="d-flex align-items-center mt-3">
+          <a href="#" class="btn btn-sm btn-primary" target="_blank" aria-label="View traffic prediction presentation">Slides</a>
+          <a href="#" class="btn btn-sm btn-outline-dark" target="_blank" aria-label="View source code of traffic prediction project">Source</a>
+          <a href="images/projects/Deep Learning on Traffic Prediction-Report.pdf" class="btn btn-sm btn-outline-info ms-2" target="_blank" aria-label="View detailed analysis report PDF">Report</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- Student Database Management System -->
+  <div class="col-sm-6 col-md-3 project-card" data-category="web">
+    <div class="card h-100 shadow animate__animated animate__fadeIn" tabindex="0">
+      <div class="card-body">
+        <h5 class="card-title">Student Data Base Management System</h5>
+        <p class="card-text">Designed a full-stack web application using HTML, Bootstrap, JavaScript, and MySQL to manage student records, course enrollments, and grade tracking with user roles and form validations.</p>
+        <div class="d-flex align-items-center mt-3">
+          <a href="#" class="btn btn-sm btn-primary" target="_blank">Live Demo</a>
+          <a href="#" class="btn btn-sm btn-outline-dark" target="_blank">Source</a>
+          <a href="images/projects/DBMS Project Report.pdf" class="btn btn-sm btn-outline-info ms-2" target="_blank">Report</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+      <!-- Instant Market Online Store -->
+      <div class="col-sm-6 col-md-3 project-card" data-category="web">
+        <div class="card h-100 shadow animate__animated animate__fadeIn" tabindex="0">
+          <div class="card-body">
+            <h5 class="card-title">Instant Market Online Store</h5>
+            <p class="card-text">Built an online eCommerce platform using HTML, Bootstrap, and JavaScript. Designed the UI based on usability and HCI metrics.</p>
+            <div class="d-flex align-items-center mt-3">
+              <a href="#" class="btn btn-sm btn-primary" target="_blank" aria-label="View demo of Instant Market Online Store">Live Demo</a>
+              <a href="#" class="btn btn-sm btn-outline-dark" target="_blank" aria-label="View source code of Instant Market Online Store">Source</a>
+              <a href="reports/instant_market_online_store_report.pdf" class="btn btn-sm btn-outline-info ms-2" target="_blank" aria-label="View project report PDF">Report</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Academic Advisor Application -->
+      <div class="col-sm-6 col-md-3 project-card" data-category="web">
+        <div class="card h-100 shadow animate__animated animate__fadeIn" tabindex="0">
+          <div class="card-body">
+            <h5 class="card-title">Academic Advisor Application</h5>
+            <p class="card-text">Developed a planning and advisor communication system with an emphasis on ARIA tags, semantic HTML, and accessibility standards.</p>
+            <div class="d-flex align-items-center mt-3">
+              <a href="#" class="btn btn-sm btn-primary" target="_blank" aria-label="View demo of Academic Advisor Application">Live Demo</a>
+              <a href="#" class="btn btn-sm btn-outline-dark" target="_blank" aria-label="View source code of Academic Advisor Application">Source</a>
+              <a href="reports/academic_advisor_application_report.pdf" class="btn btn-sm btn-outline-info ms-2" target="_blank" aria-label="View project report PDF">Report</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- UI Code Assistant -->
+      <div class="col-sm-6 col-md-3 project-card" data-category="ai">
+        <div class="card h-100 shadow animate__animated animate__fadeIn" tabindex="0">
+          <div class="card-body">
+            <h5 class="card-title">UI Code Assistant</h5>
+            <p class="card-text">Created an AI-powered tool for on-the-fly HTML/JavaScript component generation. Followed MVC patterns and measured learnability using Fitts’ Law.</p>
+            <div class="d-flex align-items-center mt-3">
+              <a href="#" class="btn btn-sm btn-primary" target="_blank" aria-label="View demo of UI Code Assistant">Live Demo</a>
+              <a href="#" class="btn btn-sm btn-outline-dark" target="_blank" aria-label="View source code of UI Code Assistant">Source</a>
+              <a href="reports/ui_code_assistant_report.pdf" class="btn btn-sm btn-outline-info ms-2" target="_blank" aria-label="View project report PDF">Report</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Automated Homework Grading System -->
+      <div class="col-sm-6 col-md-3 project-card" data-category="ai">
+        <div class="card h-100 shadow animate__animated animate__fadeIn" tabindex="0">
+          <div class="card-body">
+            <h5 class="card-title">Automated Homework Grading System</h5>
+            <p class="card-text">Built a real-time grading system with a personalized analytics dashboard. Evaluated the UI using Jakob Nielsen’s heuristics.</p>
+            <div class="d-flex align-items-center mt-3">
+              <a href="#" class="btn btn-sm btn-primary" target="_blank" aria-label="View demo of Automated Homework Grading System">Live Demo</a>
+              <a href="#" class="btn btn-sm btn-outline-dark" target="_blank" aria-label="View source code of Automated Homework Grading System">Source</a>
+              <a href="reports/automated_homework_grading_system_report.pdf" class="btn btn-sm btn-outline-info ms-2" target="_blank" aria-label="View project report PDF">Report</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Personal Portfolio Website & Gallery -->
+      <div class="col-sm-6 col-md-3 project-card" data-category="frontend">
+        <div class="card h-100 shadow animate__animated animate__fadeIn" tabindex="0">
+          <div class="card-body">
+            <h5 class="card-title">Personal Portfolio Website & Gallery</h5>
+            <p class="card-text">Developed a responsive site with ScrollReveal, Animate.css, and Typed.js. Added a resume viewer, chatbot, and an image gallery with lazy loading.</p>
+            <div class="d-flex align-items-center mt-3">
+              <a href="#" class="btn btn-sm btn-primary" target="_blank" aria-label="View demo of Personal Portfolio Website & Gallery">Live Demo</a>
+              <a href="#" class="btn btn-sm btn-outline-dark" target="_blank" aria-label="View source code of Personal Portfolio Website & Gallery">Source</a>
+              <a href="reports/portfolio_website_gallery_report.pdf" class="btn btn-sm btn-outline-info ms-2" target="_blank" aria-label="View project report PDF">Report</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Model Builder -->
+      <div class="col-sm-6 col-md-3 project-card" data-category="graphics">
+        <div class="card h-100 shadow animate__animated animate__fadeIn" tabindex="0">
+          <div class="card-body">
+            <h5 class="card-title">Model Builder</h5>
+            <p class="card-text">Developed a hierarchical 3D modeling tool using OpenGL and FLTK. Implemented .ply mesh loading and manual construction of animated characters with sliders, including transformations, hierarchy, and animation.</p>
+            <div class="d-flex align-items-center mt-3">
+              <a href="#" class="btn btn-sm btn-primary" target="_blank" aria-label="View demo of Model Builder">Live Demo</a>
+              <a href="#" class="btn btn-sm btn-outline-dark" target="_blank" aria-label="View source code of Model Builder">Source</a>
+              <a href="reports/model_builder_report.pdf" class="btn btn-sm btn-outline-info ms-2" target="_blank" aria-label="View project report PDF">Report</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Procedural Modeling -->
+      <div class="col-sm-6 col-md-3 project-card" data-category="graphics">
+        <div class="card h-100 shadow animate__animated animate__fadeIn" tabindex="0">
+          <div class="card-body">
+            <h5 class="card-title">Procedural Modeling</h5>
+            <p class="card-text">Created plant structures using L-systems and animated Boids flocking behavior in a 3D world. Included real-time parameter sliders, bounding box constraints, and orientation visualization using OpenGL.</p>
+            <div class="d-flex align-items-center mt-3">
+              <a href="#" class="btn btn-sm btn-primary" target="_blank" aria-label="View demo of Procedural Modeling">Live Demo</a>
+              <a href="#" class="btn btn-sm btn-outline-dark" target="_blank" aria-label="View source code of Procedural Modeling">Source</a>
+              <a href="reports/procedural_modeling_report.pdf" class="btn btn-sm btn-outline-info ms-2" target="_blank" aria-label="View project report PDF">Report</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- User Evaluation & Analysis -->
+      <div class="col-sm-6 col-md-3 project-card" data-category="hci">
+        <div class="card h-100 shadow animate__animated animate__fadeIn" tabindex="0">
+          <div class="card-body">
+            <h5 class="card-title">User Evaluation & Analysis</h5>
+            <p class="card-text">Conducted an HCI-based statistical study on the effectiveness of VR, coaching, and video training methods. Applied ANOVA and Chi-squared tests in Excel with Real Statistics Pack for user data analysis.</p>
+            <div class="d-flex align-items-center mt-3">
+              <a href="#" class="btn btn-sm btn-primary" target="_blank" aria-label="View demo of User Evaluation & Analysis">Live Demo</a>
+              <a href="#" class="btn btn-sm btn-outline-dark" target="_blank" aria-label="View source code of User Evaluation & Analysis">Source</a>
+              <a href="reports/user_evaluation_analysis_report.pdf" class="btn btn-sm btn-outline-info ms-2" target="_blank" aria-label="View project report PDF">Report</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Make-it-Home Furniture Optimization -->
+      <div class="col-sm-6 col-md-3 project-card" data-category="graphics">
+        <div class="card h-100 shadow animate__animated animate__fadeIn" tabindex="0">
+          <div class="card-body">
+            <h5 class="card-title">Make-it-Home: Furniture Optimization</h5>
+            <p class="card-text">Built an optimization-based layout tool using simulated annealing. Automatically arranged virtual furniture to meet spatial constraints (e.g., distance and orientation) between TV and couch, with cost visualizations.</p>
+            <div class="d-flex align-items-center mt-3">
+              <a href="#" class="btn btn-sm btn-primary" target="_blank" aria-label="View demo of Make-it-Home Optimization">Live Demo</a>
+              <a href="#" class="btn btn-sm btn-outline-dark" target="_blank" aria-label="View source code of Make-it-Home Optimization">Source</a>
+              <a href="reports/make_it_home_furniture_optimization_report.pdf" class="btn btn-sm btn-outline-info ms-2" target="_blank" aria-label="View project report PDF">Report</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- Achievements & Certifications Section -->
+<section id="achievements" class="py-5 bg-light animate__animated animate__fadeInUp">
+  <div class="container">
+    <h2 class="text-center mb-4">
+      <i class="fas fa-award me-2"></i> Achievements & Certifications
+    </h2>
+    <div class="row g-4">
+
+      <!-- Aaruush Certificate Card -->
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="card achievement-card h-100">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Aaruush 2022 – Event Organizer</h5>
+            <p class="card-text">
+              Recognized for excellence in coordinating large-scale innovation events at Aaruush 2022, fostering collaboration and creativity among participants.
+            </p>
+            <div class="mt-auto">
+              <a href="https://22nd.aaruush.org"
+                 target="_blank" rel="noopener"
+                 class="btn btn-sm btn-outline-primary me-2"
+                 aria-label="Learn more about NASA Space App Challenge">
+                Learn More
+              </a>
+              <button type="button"
+                      class="btn btn-sm btn-outline-primary preview-certificate-btn"
+                      data-bs-toggle="modal"
+                      data-bs-target="#certificateModal"
+                      data-certificate="images/certificates/Aaruush_Certificate.pdf"
+                      data-certificate-name="Aaruush Event Organizer Certificate"
+                      aria-label="View Aaruush Event Organizer Certificate">
+                View Certificate
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- NASA Space App Card -->
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="card achievement-card h-100">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">NASA Space App</h5>
+            <p class="card-text">
+              Organized NASA’s 2022 Space Apps Challenge in Chennai, attracting over 1,200 participants.
+              Led team selection and mentoring, and our team earned an honorable nomination from NASA.
+            </p>
+            <div class="mt-auto">
+              <a href="https://2021.spaceappschallenge.org/locations/aaruush-chennai/event"
+                 target="_blank" rel="noopener"
+                 class="btn btn-sm btn-outline-primary me-2"
+                 aria-label="Learn more about NASA Space App Challenge">
+                Learn More
+              </a>
+              <a href="https://2022.spaceappschallenge.org/challenges/2022-challenges/nimbus-to-now/teams/singularity-6/project"
+                 target="_blank" rel="noopener"
+                 class="btn btn-sm btn-outline-primary me-2"
+                 aria-label="View Global Nominee Project">
+                Global Nominee
+              </a>
+              <button type="button"
+                      class="btn btn-sm btn-outline-primary preview-certificate-btn"
+                      data-bs-toggle="modal"
+                      data-bs-target="#certificateModal"
+                      data-certificate="images/NASA-SAC.jpg"
+                      data-certificate-name="NASA Space App Certificate"
+                      aria-label="View NASA Space App Certificate">
+                View Certificate
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Introduction to Programming with MATLAB Card -->
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="card achievement-card h-100">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Intro to Programming with MATLAB</h5>
+            <p class="card-text">
+              A comprehensive non-credit MATLAB programming course from Vanderbilt University on Coursera, mastering algorithm design, matrix operations, and data visualization.
+            </p>
+            <div class="mt-auto">
+              <a href="https://coursera.org/share/3d93e3f678518262dba19188844ce389"
+                 target="_blank" rel="noopener"
+                 class="btn btn-sm btn-outline-primary me-2"
+                 aria-label="Verify MATLAB Programming Certificate">
+                Learn More
+              </a>
+              <button type="button"
+                      class="btn btn-sm btn-outline-primary preview-certificate-btn"
+                      data-bs-toggle="modal"
+                      data-bs-target="#certificateModal"
+                      data-certificate="images/certificates/Matlab-Programming-Certificate.pdf"
+                      data-certificate-name="Intro to Programming with MATLAB Certificate"
+                      aria-label="View MATLAB Programming Certificate">
+                View Certificate
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Foundations of Data Science Card -->
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="card achievement-card h-100">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Foundations of Data Science</h5>
+            <p class="card-text">
+              A rigorous 22-week Foundations of Data Science program, mastering key skills in statistical analysis,
+              data preprocessing, visualization, and introductory machine learning.
+            </p>
+            <div class="mt-auto">
+              <a href="https://padhai.onefourthlabs.in/certificates/snoaxsoysc"
+                 target="_blank" rel="noopener"
+                 class="btn btn-sm btn-outline-primary me-2"
+                 aria-label="Learn more about Foundations of Data Science">
+                Learn More
+              </a>
+              <button type="button"
+                      class="btn btn-sm btn-outline-primary preview-certificate-btn"
+                      data-bs-toggle="modal"
+                      data-bs-target="#certificateModal"
+                      data-certificate="images/certificates/Foundations-DS-Certificate.pdf"
+                      data-certificate-name="Foundations of Data Science Certificate"
+                      aria-label="View Foundations of Data Science Certificate">
+                View Certificate
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HackerRank Problem Solving (Basic) Card -->
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="card achievement-card h-100">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Problem Solving (Basic) – HackerRank</h5>
+            <p class="card-text">
+              Certified in Problem Solving (Basic) by HackerRank, demonstrating strong skills in algorithmic logic and data structures.
+            </p>
+            <div class="mt-auto">
+              <a href="https://www.hackerrank.com/certificates/iframe/7e73b6e77762"
+                 target="_blank" rel="noopener"
+                 class="btn btn-sm btn-outline-primary me-2"
+                 aria-label="Learn More HackerRank Problem Solving Certificate">
+                Learn More
+              </a>
+              <button type="button"
+                      class="btn btn-sm btn-outline-primary preview-certificate-btn"
+                      data-bs-toggle="modal"
+                      data-bs-target="#certificateModal"
+                      data-certificate="images/certificates/problem_solving_basic certificate.pdf"
+                      data-certificate-name="HackerRank Problem Solving (Basic) Certificate"
+                      aria-label="View HackerRank Problem Solving Certificate">
+                View Certificate
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HackerRank Python (Basic) Card -->
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="card achievement-card h-100">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Python (Basic) – HackerRank</h5>
+            <p class="card-text">
+              Successfully completed the Python (Basic) certification on HackerRank, covering syntax, loops, functions, and basic programming logic.
+            </p>
+            <div class="mt-auto">
+              <a href="https://www.hackerrank.com/certificates/iframe/4da3a40f66c8"
+                 target="_blank" rel="noopener"
+                 class="btn btn-sm btn-outline-primary me-2"
+                 aria-label="Learn More HackerRank Python Certificate">
+                Learn More
+              </a>
+              <button type="button"
+                      class="btn btn-sm btn-outline-primary preview-certificate-btn"
+                      data-bs-toggle="modal"
+                      data-bs-target="#certificateModal"
+                      data-certificate="images/certificates/python_basic certificate.pdf"
+                      data-certificate-name="HackerRank Python (Basic) Certificate"
+                      aria-label="View HackerRank Python Certificate">
+                View Certificate
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HackerRank Frontend Developer (React) Certificate Card -->
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="card achievement-card h-100">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Frontend Developer (React) – HackerRank</h5>
+            <p class="card-text">
+              Certified in Frontend Development with React on HackerRank, covering React, CSS, and JavaScript concepts.
+            </p>
+            <div class="mt-auto">
+              <a href="https://www.hackerrank.com/certificates/iframe/8caacc789cf6"
+                 target="_blank" rel="noopener"
+                 class="btn btn-sm btn-outline-primary me-2"
+                 aria-label="Learn more about HackerRank Frontend Developer React Certificate">
+                Learn More
+              </a>
+              <button type="button"
+                      class="btn btn-sm btn-outline-primary preview-certificate-btn"
+                      data-bs-toggle="modal"
+                      data-bs-target="#certificateModal"
+                      data-certificate="images/certificates/frontend_developer_react certificate.pdf"
+                      data-certificate-name="HackerRank Frontend Developer (React) Certificate"
+                      aria-label="View HackerRank Frontend Developer React Certificate">
+                View Certificate
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HackerRank SQL (Advanced) Certificate Card -->
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="card achievement-card h-100">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">SQL (Advanced) – HackerRank</h5>
+            <p class="card-text">
+              Completed the Advanced SQL certification on HackerRank, including query optimization, window functions, and pivots.
+            </p>
+            <div class="mt-auto">
+              <a href="https://www.hackerrank.com/certificates/iframe/02aa2278056a"
+                 target="_blank" rel="noopener"
+                 class="btn btn-sm btn-outline-primary me-2"
+                 aria-label="Learn more about HackerRank SQL Advanced Certificate">
+                Learn More
+              </a>
+              <button type="button"
+                      class="btn btn-sm btn-outline-primary preview-certificate-btn"
+                      data-bs-toggle="modal"
+                      data-bs-target="#certificateModal"
+                      data-certificate="images/certificates/sql_advanced certificate.pdf"
+                      data-certificate-name="HackerRank SQL (Advanced) Certificate"
+                      aria-label="View HackerRank SQL Advanced Certificate">
+                View Certificate
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Database Foundations Certificate Card -->
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="card achievement-card h-100">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Database Foundations – Oracle</h5>
+            <p class="card-text">
+              Certified in Database Foundations, with training in database schema design, SQL operations, and normalization.
+            </p>
+            <div class="mt-auto">
+              <a href="https://signon.oracle.com/signin"
+                 target="_blank" rel="noopener"
+                 class="btn btn-sm btn-outline-primary me-2"
+                 aria-label="Open Database Foundations Certificate">
+                Learn More
+              </a>
+              <button type="button"
+                      class="btn btn-sm btn-outline-primary preview-certificate-btn"
+                      data-bs-toggle="modal"
+                      data-bs-target="#certificateModal"
+                      data-certificate="images/certificates/clmsCertificate.prMain.pdf"
+                      data-certificate-name="Database Foundations Certificate"
+                      aria-label="View Database Foundations Certificate">
+                View Certificate
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-5 bg-white animate__animated animate__fadeInUp">
+      <div class="container">
+        <h2 class="text-center mb-5">
+          <i class="fas fa-quote-left me-2"></i>
+          Testimonials
+        </h2>        
+        <div class="row justify-content-center">
+          <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow testimonial-card">
+              <div class="card-body d-flex flex-column">
+                <div class="d-flex align-items-center mb-3">
+                  <img src="images/testimonials/Headshot 1.jpg" alt="Dr. A Rathinam Headshot" class="testimonial-headshot me-3" />
+                  <div>
+                    <strong>
+                      <a href="https://www.linkedin.com/in/rathinam-ananthanarayanan-75470710/" target="_blank" rel="noopener noreferrer">
+                        Dr. A Rathinam
+                      </a>
+                    </strong>
+                    <p class="mb-0 text-muted" style="font-size: 0.9rem;">Director of Alumni Affairs &amp; Professor, Department of Electrical and Electronics Engineering, Convenor of <a href="https://22nd.aaruush.org" target="_blank" aria-label="Visit Aaruush website" rel="noopener" class="aaruush-link">Aaruush</a> at SRM Institute of Science and Technology</p>
+                  </div>
+                </div>
+                <div class="flex-grow-1">
+                  <p class="mb-2">
+                    <i class="fas fa-quote-left text-primary me-2"></i>
+                    Working with Ganesh was a delight. He brought creative solutions to complex issues.
+                  </p>
+                </div>
+                <button type="button" class="btn btn-sm btn-outline-primary mt-2 preview-certificate-btn"
+                        data-bs-toggle="modal" data-bs-target="#certificateModal"
+                        data-certificate="images/certificates/Aaruush_Certificate.pdf"
+                        data-certificate-name="Aaruush Certificate"
+                        aria-label="View Aaruush Certificate">
+                  View Certificate
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow testimonial-card">
+              <div class="card-body d-flex flex-column">
+                <div class="d-flex align-items-center mb-3">
+                  <img src="images/testimonials/Headshot 2.jpg" alt="Dr. V Thirumurugan Headshot" class="testimonial-headshot me-3" />
+                  <div>
+                    <strong>
+                      <a href="https://www.linkedin.com/in/dr-varatharajan-thirumurugan-02110812/" target="_blank" rel="noopener noreferrer">
+                        Dr. V Thirumurugan
+                      </a>
+                    </strong>
+                    <p class="mb-0 text-muted" style="font-size: 0.9rem;">Associate Director (Campus Life) at SRM Institute of Science and Technology</p>
+                  </div>
+                </div>
+                <div class="flex-grow-1">
+                  <p class="mb-2">
+                    <i class="fas fa-quote-left text-primary me-2"></i>
+                    Ganesh's coding skills are top-notch. He consistently delivered on time and went above and beyond.
+                  </p>
+                </div>
+                <button type="button" class="btn btn-sm btn-outline-primary mt-2 preview-certificate-btn"
+                        data-bs-toggle="modal" data-bs-target="#certificateModal"
+                        data-certificate="images/certificates/certificate_thirumurugan.jpg"
+                        data-certificate-name="Thirumurugan Certificate"
+                        aria-label="View Thirumurugan Certificate">
+                  View Certificate
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow testimonial-card">
+              <div class="card-body d-flex flex-column">
+                <div class="d-flex align-items-center mb-3">
+                  <img src="images/testimonials/Headshot 3.jpg" alt="Dr. A Shanthini Headshot" class="testimonial-headshot me-3" />
+                  <div>
+                    <strong>
+                      <a href="https://www.linkedin.com/in/shanthini-a-984544244/" target="_blank" rel="noopener noreferrer">
+                        Dr. A Shanthini
+                      </a>
+                    </strong>
+                    <p class="mb-0 text-muted" style="font-size: 0.9rem;">Associate Professor at SRM University</p>
+                  </div>
+                </div>
+                <div class="flex-grow-1">
+                  <p class="mb-2">
+                    <i class="fas fa-quote-left text-primary me-2"></i>
+                    He was instrumental in our startup’s success, providing robust front-end and AI solutions.
+                  </p>
+                </div>
+                <button type="button" class="btn btn-sm btn-outline-primary mt-2 preview-certificate-btn"
+                        data-bs-toggle="modal" data-bs-target="#certificateModal"
+                        data-certificate="images/certificates/A.SHANTHINI LOR.pdf"
+                        data-certificate-name="Shanthini Certificate"
+                        aria-label="View Shanthini Certificate">
+                  View Certificate
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Gallery Section (Images + Videos Combined) -->
+    <section id="gallery" class="py-5 bg-white animate__animated animate__fadeInUp">
+      <div class="container">
+        <h2 class="text-center mb-4">
+          <i class="fas fa-images me-2"></i> Gallery
+        </h2>
+        <div id="myGalleryCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+          <div class="carousel-inner">
+            <!-- Image Items -->
+            <div class="carousel-item active">
+              <img src="images/Aaruush.jpg" class="d-block w-100 carousel-img" alt="Core Team of Aaruush '22" loading="lazy" />
+            </div>
+            <div class="carousel-item">
+              <img src="images/NASA-SAC.jpg" class="d-block w-100 carousel-img" alt="Local Lead for NASA SPACE APP CHALLENGE" loading="lazy" />
+            </div>
+            <div class="carousel-item">
+              <img src="images/Ganesh.jpg" class="d-block w-100 carousel-img" alt="Ganesh at Admiration day" loading="lazy" />
+            </div>
+            <div class="carousel-item">
+              <img src="images/IMG20220805181152.jpg" class="d-block w-100 carousel-img" alt="Ganesh at Admiration day event" loading="lazy" />
+            </div>
+            <!-- Video Items -->
+            <div class="carousel-item">
+              <video controls poster="images/_DSC0024.jpg" class="d-block w-100 carousel-img">
+                <source src="images/HACK%20SUMMIT%203.0%20Teaser.mp4" type="video/mp4">
+                <source src="images/video1.webm" type="video/webm">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <div class="carousel-item">
+              <video controls poster="images/Aaruush%2022%20backdrop.png" class="d-block w-100 carousel-img">
+                <source src="images/Hack%20Summit%203.0.mp4" type="video/mp4">
+                <source src="images/video2.webm" type="video/webm">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#myGalleryCarousel" data-bs-slide="prev" aria-label="Previous slide">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#myGalleryCarousel" data-bs-slide="next" aria-label="Next slide">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+        <div class="text-center mt-4">
+          <a href="gallery.html" class="btn btn-primary">Load More</a>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5 bg-light animate__animated animate__fadeInUp">
+      <div class="container">
+        <h2 class="text-center mb-4">
+          <i class="fas fa-paper-plane me-2"></i> Contact Me
+        </h2>
+        <form action="https://formspree.io/f/mwkajzzb" method="POST" class="w-75 mx-auto needs-validation" id="contactForm" novalidate>
+          <div class="mb-3">
+            <label for="name" class="form-label">Your Name</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="e.g. John Doe" required />
+            <div class="invalid-feedback">Please enter your name.</div>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Your Email</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="e.g. john@example.com" required />
+            <div class="invalid-feedback">Please enter a valid email address.</div>
+          </div>
+          <div class="mb-3">
+            <label for="message" class="form-label">Your Message</label>
+            <textarea class="form-control" id="message" name="message" rows="4" placeholder="Your Message Here..." required></textarea>
+            <div class="invalid-feedback">Please enter a message.</div>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary">Send</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Resume Preview & Download Section -->
+    <section class="py-5 bg-white animate__animated animate__fadeInUp">
+      <div class="container text-center">
+        <h2 class="text-center mb-4">
+          <i class="fas fa-file-alt me-2"></i> Resume Preview & Download
+        </h2>
+        <div class="ratio ratio-16x9 mb-4" style="max-width: 800px; margin: auto; border:1px solid #ccc; border-radius:8px;">
+          <iframe src="Ganesh_Resume.pdf" width="100%" height="600px" allowfullscreen title="Resume PDF preview">
+            Your browser does not support PDF preview. <a href="Ganesh_Resume.pdf" target="_blank">Download it here</a>
+          </iframe>
+        </div>
+        <a href="Ganesh_Resume.pdf" class="btn btn-outline-primary btn-lg" download>
+          <i class="fas fa-download me-2"></i>Download My Resume (PDF)
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-white text-center py-3 bg-dark">
+    <p class="mb-0">&copy; 2025 Veera Venkata Ganesh Nurukurthi. All rights reserved.</p>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button id="backToTop" class="back-to-top" aria-label="Scroll back to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <!-- Certificate Preview Modal -->
+  <div class="modal fade" id="certificateModal" tabindex="-1" aria-labelledby="certificateModalLabel" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="certificateModalLabel">Certificate</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close Certificate Modal"></button>
+        </div>
+        <div class="modal-body">
+          <p class="certificate-name" style="font-weight:bold; margin-bottom: 10px;">Certificate Name</p>
+          <img src="" id="certificatePreviewImage" alt="Certificate Preview" class="img-fluid" />
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- JS Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12" defer></script>
+  <script src="https://unpkg.com/scrollreveal" defer></script>
+  <script src="app.js" defer></script>
+
+  <!-- ScrollReveal Animations -->
+  <script defer>
+    const sr = ScrollReveal();
+    sr.reveal("section", { delay: 200, duration: 800, easing: 'ease-in-out', reset: false });
+    sr.reveal(".project-card", { delay: 300, duration: 1000, easing: 'cubic-bezier(0.68,-0.55,0.27,1.55)', reset: false });
+    sr.reveal('.timeline-item:nth-child(odd)', { origin: 'left',  distance: '50px', duration: 800, easing: 'ease-out', reset: false });
+    sr.reveal('.timeline-item:nth-child(even)',{ origin: 'right', distance: '50px', duration: 800, easing: 'ease-out', reset: false });
+  </script>
+<!-- Sidebar, Back to Top and Progress Bar Animation Scripts -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Active link highlighting in sidebar
+      const sidebarLinks = document.querySelectorAll('.sidebar-link');
+      function setActiveLink() {
+        let scrollPosition = document.documentElement.scrollTop || document.body.scrollTop;
+        sidebarLinks.forEach(link => {
+          let section = document.querySelector(link.getAttribute('href'));
+          if (section.offsetTop <= scrollPosition + 100 && (section.offsetTop + section.offsetHeight) > scrollPosition + 100) {
+            link.classList.add('active-link');
+          } else {
+            link.classList.remove('active-link');
+          }
+        });
+      }
+      window.addEventListener('scroll', setActiveLink);
+      setActiveLink();
+      
+      // Sidebar toggle functionality
+      const sidebar = document.getElementById('sidebar');
+      document.getElementById('sidebarToggle').addEventListener('click', function() {
+        sidebar.classList.toggle('translate-on');
+      });
+      
+      // Back to top button visibility and scroll behavior
+      const backToTop = document.getElementById('backToTop');
+      window.addEventListener('scroll', function() {
+        backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
+      });
+      backToTop.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+      
+      // Animate Skill Progress Bars using Intersection Observer
+      const progressBars = document.querySelectorAll('.progress-bar');
+      function animateProgressBars() {
+        progressBars.forEach(bar => {
+          const targetWidth = bar.getAttribute('data-target-width');
+          bar.style.width = targetWidth;
+        });
+      }
+      const skillsSection = document.getElementById('skills');
+      const observerOptions = { threshold: 0.5 };
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting) {
+            animateProgressBars();
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+      if (skillsSection) {
+        observer.observe(skillsSection);
+      }
+    });
+    
+    // Service Worker Registration for PWA support
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+          console.log('Service Worker registered with scope:', registration.scope);
+        }, function(err) {
+          console.log('Service Worker registration failed:', err);
+        });
+      });
+    }
+  </script>
+</body>
+</html>
