@@ -115,8 +115,8 @@ body[data-theme="dark"] #site-header{box-shadow:0 2px 20px rgba(0,0,0,.4)}
 .sidebar-brand{display:flex;align-items:center;text-decoration:none;}
 .sidebar-brand-name{font-weight:800;font-size:1.15rem;color:var(--text-dark);letter-spacing:-.02em;}
 .sidebar-brand-dot{font-weight:900;font-size:1.5rem;line-height:1;background:var(--primary-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.sidebar-close-btn{background:none;border:1px solid var(--border);color:var(--text-muted);width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.9rem;transition:color var(--t),background var(--t),border-color var(--t);}
-.sidebar-close-btn:hover{color:var(--primary);border-color:var(--primary);background:rgba(79,70,229,.08);}
+.sidebar-close-btn,.sidebar-theme-btn{background:none;border:1px solid var(--border);color:var(--text-muted);width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.9rem;transition:color var(--t),background var(--t),border-color var(--t);}
+.sidebar-close-btn:hover,.sidebar-theme-btn:hover{color:var(--primary);border-color:var(--primary);background:rgba(79,70,229,.08);}
 
 .sidebar-nav{flex:1;padding:.5rem 0;display:flex;flex-direction:column;overflow-y:auto;overflow-x:hidden;}
 .sidebar-link{display:flex;align-items:center;gap:.9rem;padding:.72rem 1.5rem;color:var(--text-muted);text-decoration:none;font-size:.95rem;font-weight:500;transition:color var(--t),background var(--t),transform .2s ease;position:relative;}
@@ -1048,21 +1048,24 @@ body[data-theme="light"] #_toast{
 
 /* ── Hero ── */
 @media(max-width:768px){
-  .hero-section{padding:6rem 0 3.5rem;}
+  .hero-section{padding:5.5rem 0 3rem;}
   .hero-badge{font-size:.72rem;padding:.28rem .75rem;}
   .hero-desc{font-size:.88rem;max-width:100%;}
   .hero-socials{gap:.85rem;margin-top:1.25rem;}
 }
 @media(max-width:480px){
-  .hero-section{padding:5rem 0 2.5rem;}
+  .hero-section{padding:4.5rem 0 2rem;}
   .hero-title{font-size:clamp(1.75rem,8vw,2.4rem)!important;}
-  .hero-subtitle{font-size:.92rem;}
-  .hero-desc{font-size:.84rem;line-height:1.7;}
-  .hero-cta-row{flex-direction:column;align-items:stretch;gap:.55rem;margin-top:1.4rem;}
-  .hero-btn-primary,.hero-btn-ghost{justify-content:center;padding:.7rem 1.2rem;font-size:.88rem;width:100%;}
-  .hero-sphere-col{height:210px!important;min-height:210px!important;}
-  .hero-sphere-wrap{height:210px!important;}
-  .hero-socials{justify-content:center;}
+  .hero-subtitle{font-size:.92rem;margin-bottom:.4rem;}
+  .hero-desc{font-size:.84rem;line-height:1.65;margin-bottom:.2rem;}
+  /* 2-up row: primary + view work; Resume on second row smaller */
+  .hero-cta-row{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-top:1.2rem;}
+  .hero-cta-row a:last-child{grid-column:1/-1;}
+  .hero-btn-primary,.hero-btn-ghost{justify-content:center;padding:.6rem .9rem;font-size:.84rem;width:100%;}
+  .hero-cta-row a:last-child.hero-btn-ghost{padding:.5rem .9rem;font-size:.8rem;opacity:.85;}
+  .hero-socials{justify-content:center;gap:.75rem;margin-top:1rem;}
+  .hero-sphere-col{height:200px!important;min-height:200px!important;}
+  .hero-sphere-wrap{height:200px!important;}
   /* Hide orbs on small screens — they bleed out */
   .hero-orb-3{display:none;}
 }
@@ -1134,13 +1137,16 @@ body[data-theme="light"] #_toast{
 
 /* ── Resume ── */
 @media(max-width:576px){
-  .resume-preview{aspect-ratio:unset;height:340px;}
+  .resume-preview{aspect-ratio:unset;height:380px;overflow:auto;}
+  .resume-preview iframe{width:100%;height:100% !important;}
 }
 
 /* ── Footer ── */
 @media(max-width:576px){
-  footer .d-flex{flex-direction:column;align-items:center;gap:.75rem;text-align:center;}
-  footer .footer-social{justify-content:center;}
+  /* Stack copyright above socials, but keep socials row horizontal */
+  footer .container.d-flex{flex-direction:column;align-items:center;gap:.5rem;text-align:center;}
+  footer .footer-social{flex-direction:row!important;justify-content:center;gap:1.25rem;}
+  footer .footer-copy{font-size:.78rem;}
 }
 
 /* ── Toast — keep above mobile nav bar ── */
@@ -1269,14 +1275,15 @@ body[data-theme="light"] #_toast{
 
 /* ── Touch targets: interactive controls at least 44×44px ── */
 @media(max-width:768px){
-  .sidebar-link,.header-link,.hero-btn-primary,.hero-btn-ghost,
-  .tc-arrow,.hire-banner-cta,.header-icon-btn,
+  /* NOTE: .header-icon-btn intentionally excluded — it is display:none on mobile */
+  .sidebar-link,.tc-arrow,
   .sidebar-close-btn,.cm-close,.section-cert-close,
-  #backToTop,#themeToggle,.header-menu-btn{
+  #backToTop,.header-menu-btn{
     min-height:44px;min-width:44px;
     display:inline-flex;align-items:center;justify-content:center;
   }
-  .contact-copy-btn{min-height:40px;}
+  .hero-btn-primary,.hero-btn-ghost{min-height:44px;}
+  .contact-copy-btn,.hire-banner-cta{min-height:40px;}
 }
 
 /* ── Footer: reduce padding on mobile ── */
