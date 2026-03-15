@@ -1613,7 +1613,11 @@ function initProjectThumbs(){
   };
   document.querySelectorAll('.project-thumb[data-type]').forEach(el=>{
     const svg=S[el.dataset.type];
-    if(svg) el.innerHTML=svg;
+    if(!svg) return;
+    el.innerHTML=svg;
+    // Make SVG fill container like object-fit:cover (no letterboxing on mobile)
+    const svgEl=el.querySelector('svg');
+    if(svgEl) svgEl.setAttribute('preserveAspectRatio','xMidYMid slice');
   });
 }
 

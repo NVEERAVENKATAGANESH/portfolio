@@ -166,9 +166,13 @@ body.sidebar-open{overflow:hidden;}
 
 /* ══ DARK MODE — comprehensive overrides ══ */
 
-/* Section backgrounds */
+/* Section backgrounds — dark mode */
 body[data-theme="dark"] #about,body[data-theme="dark"] #skills,body[data-theme="dark"] #testimonials,body[data-theme="dark"] #resume{background-color:#0a0d16}
-body[data-theme="dark"] #timeline,body[data-theme="dark"] #achievements,body[data-theme="dark"] #contact,body[data-theme="dark"] #gallery{background-color:#0d1020}
+body[data-theme="dark"] #timeline,body[data-theme="dark"] #projects,body[data-theme="dark"] #achievements,body[data-theme="dark"] #contact,body[data-theme="dark"] #gallery{background-color:#0d1020}
+
+/* Section backgrounds — light mode (galaxy stopped; need visible structure) */
+body[data-theme="light"] #about,body[data-theme="light"] #skills,body[data-theme="light"] #achievements,body[data-theme="light"] #contact{background-color:var(--bg)}
+body[data-theme="light"] #timeline,body[data-theme="light"] #projects,body[data-theme="light"] #testimonials,body[data-theme="light"] #gallery,body[data-theme="light"] #resume{background-color:var(--bg-light)}
 
 /* Cards */
 body[data-theme="dark"] .card,body[data-theme="dark"] .achievement-card,body[data-theme="dark"] .testimonial-card,body[data-theme="dark"] .about-stat-card{background-color:var(--card);color:var(--text);border-color:var(--border);}
@@ -1188,7 +1192,7 @@ body[data-theme="light"] #_toast{
 /* ── Global: prevent horizontal overflow ── */
 @media(max-width:768px){
   html,body{overflow-x:hidden;max-width:100vw;}
-  *{max-width:100%;}
+  img,svg,video,canvas,object,embed,iframe,table{max-width:100%;}
 }
 
 /* ── Hero: fluid heading, vertical stack, sphere sizing ── */
@@ -1263,16 +1267,16 @@ body[data-theme="light"] #_toast{
   h3{font-size:clamp(1.1rem,4vw,1.5rem);}
 }
 
-/* ── Touch targets: all buttons/links at least 44×44px ── */
+/* ── Touch targets: interactive controls at least 44×44px ── */
 @media(max-width:768px){
-  .btn,.sidebar-link,.header-link,.hero-btn-primary,.hero-btn-ghost,
-  .tc-arrow,.contact-copy-btn,.hire-banner-cta,.header-icon-btn,
-  .sidebar-close-btn,.cm-close,.section-cert-close{
+  .sidebar-link,.header-link,.hero-btn-primary,.hero-btn-ghost,
+  .tc-arrow,.hire-banner-cta,.header-icon-btn,
+  .sidebar-close-btn,.cm-close,.section-cert-close,
+  #backToTop,#themeToggle,.header-menu-btn{
     min-height:44px;min-width:44px;
     display:inline-flex;align-items:center;justify-content:center;
   }
-  .sidebar-link{min-height:44px;}
-  a[href]{padding:.25rem 0;}
+  .contact-copy-btn{min-height:40px;}
 }
 
 /* ── Footer: reduce padding on mobile ── */
@@ -1289,4 +1293,37 @@ body[data-theme="light"] #_toast{
 /* ── Sidebar: full height, good spacing on small screens ── */
 @media(max-width:360px){
   .mobile-sidebar{width:calc(100vw - 32px);max-width:280px;}
+}
+
+/* ── About photo: cap size on small screens ── */
+@media(max-width:480px){
+  .about-photo{width:150px;height:150px;}
+  .about-photo-wrap{display:block;width:fit-content;margin:0 auto;}
+}
+
+/* ── Project cards: consistent height on mobile ── */
+@media(max-width:576px){
+  .project-card .card{height:auto;}
+  .project-thumb{height:110px;}
+}
+
+/* ── Gallery strip: 2 cols min on very small screens ── */
+@media(max-width:360px){
+  .gallery-strip{grid-template-columns:1fr;}
+}
+
+/* ── Section padding: tighter on mobile ── */
+@media(max-width:480px){
+  section{padding:48px 0;}
+  .container{padding-left:.85rem;padding-right:.85rem;}
+}
+
+/* ── Light mode card shadow enhancement: better separation from bg ── */
+body[data-theme="light"] .card,
+body[data-theme="light"] .achievement-card,
+body[data-theme="light"] .testimonial-card{
+  box-shadow:0 1px 4px rgba(0,0,0,.1),0 4px 20px rgba(0,0,0,.08);
+}
+body[data-theme="light"] .skill-card{
+  box-shadow:0 1px 4px rgba(0,0,0,.1),0 4px 20px rgba(0,0,0,.08);
 }
