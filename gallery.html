@@ -541,61 +541,8 @@
 </head>
 <body><script>(function(){var t=document.documentElement.getAttribute('data-theme');if(t)document.body.setAttribute('data-theme',t);})()</script>
 
-  <!-- ── HEADER (matches index.html) ── -->
-  <header id="site-header" role="banner">
-    <div class="header-inner">
-      <a href="index.html" class="header-brand" aria-label="Back to portfolio">
-        <span class="header-name">Ganesh</span><span class="header-dot" aria-hidden="true">.</span>
-      </a>
-      <nav class="header-nav" aria-label="Primary navigation">
-        <a href="index.html#home"         class="header-link"><i class="fas fa-home" aria-hidden="true"></i><span>Home</span></a>
-        <a href="index.html#about"        class="header-link"><i class="fas fa-user" aria-hidden="true"></i><span>About</span></a>
-        <a href="index.html#timeline"     class="header-link"><i class="fas fa-route" aria-hidden="true"></i><span>Journey</span></a>
-        <a href="index.html#skills"       class="header-link"><i class="fas fa-code" aria-hidden="true"></i><span>Skills</span></a>
-        <a href="index.html#projects"     class="header-link"><i class="fas fa-folder-open" aria-hidden="true"></i><span>Projects</span></a>
-        <a href="gallery.html"            class="header-link active-link"><i class="fas fa-images" aria-hidden="true"></i><span>Gallery</span></a>
-        <a href="index.html#contact"      class="header-link"><i class="fas fa-envelope" aria-hidden="true"></i><span>Contact</span></a>
-      </nav>
-      <div class="header-controls">
-        <a href="https://www.linkedin.com/in/veera-venkata-ganesh-nurukurthi-437195226/" target="_blank" rel="noopener noreferrer" class="header-icon-btn" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
-        <a href="https://github.com/NVEERAVENKATAGANESH" target="_blank" rel="noopener noreferrer" class="header-icon-btn" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
-        <label class="header-theme-switch" aria-label="Toggle dark/light theme">
-          <input type="checkbox" id="theme-toggle"/>
-          <span class="header-slider"><span class="header-slider-thumb"></span></span>
-        </label>
-        <button type="button" class="header-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileSidebar">
-          <span class="hb-bar hb-top" aria-hidden="true"></span>
-          <span class="hb-bar hb-mid" aria-hidden="true"></span>
-          <span class="hb-bar hb-bot" aria-hidden="true"></span>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <!-- MOBILE SIDEBAR -->
-  <div id="sidebarBackdrop" class="sidebar-backdrop" aria-hidden="true"></div>
-  <aside id="mobileSidebar" class="mobile-sidebar" aria-label="Mobile navigation" aria-hidden="true">
-    <div class="sidebar-header">
-      <a href="index.html" class="sidebar-brand" aria-label="Back to portfolio">
-        <span class="sidebar-brand-name">Ganesh</span><span class="sidebar-brand-dot" aria-hidden="true">.</span>
-      </a>
-      <button type="button" id="sidebarThemeToggle" class="sidebar-theme-btn" aria-label="Toggle theme">
-        <i class="fas fa-moon" id="sidebarThemeIcon" aria-hidden="true"></i>
-      </button>
-      <button type="button" id="sidebarCloseBtn" class="sidebar-close-btn" aria-label="Close menu">
-        <i class="fas fa-times" aria-hidden="true"></i>
-      </button>
-    </div>
-    <nav class="sidebar-nav" aria-label="Sidebar navigation">
-      <a href="index.html#home"         class="sidebar-link"><i class="fas fa-home" aria-hidden="true"></i><span>Home</span></a>
-      <a href="index.html#about"        class="sidebar-link"><i class="fas fa-user" aria-hidden="true"></i><span>About</span></a>
-      <a href="index.html#timeline"     class="sidebar-link"><i class="fas fa-route" aria-hidden="true"></i><span>Journey</span></a>
-      <a href="index.html#skills"       class="sidebar-link"><i class="fas fa-code" aria-hidden="true"></i><span>Skills</span></a>
-      <a href="index.html#projects"     class="sidebar-link"><i class="fas fa-folder-open" aria-hidden="true"></i><span>Projects</span></a>
-      <a href="gallery.html"            class="sidebar-link"><i class="fas fa-images" aria-hidden="true"></i><span>Gallery</span></a>
-      <a href="index.html#contact"      class="sidebar-link"><i class="fas fa-envelope" aria-hidden="true"></i><span>Contact</span></a>
-    </nav>
-  </aside>
+  <!-- nav injected by buildNav() in app.js — edit nav links/structure there -->
+  <div id="nav-root"></div>
 
   <h1 class="visually-hidden">Gallery — Photos &amp; Videos</h1>
 
@@ -681,56 +628,13 @@
   <!-- ── TOAST ── -->
   <div id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
 
-  <!-- Scripts (Bootstrap JS not needed on gallery page) -->
+  <!-- app.js shared first (nav, theme, header), then inline gallery JS -->
+  <script defer src="app.js"></script>
 
   <script>
   document.addEventListener('DOMContentLoaded', () => {
 
-    // ── FOOTER YEAR ──
-    const footerYear = document.getElementById('footerYear');
-    if (footerYear) footerYear.textContent = new Date().getFullYear();
-
-    // ── THEME — matches index.html (syncs body + documentElement) ──
-    const themeToggle   = document.getElementById('theme-toggle');
-    const sbThemeBtn    = document.getElementById('sidebarThemeToggle');
-    const sbThemeIcon   = document.getElementById('sidebarThemeIcon');
-    const applyTheme  = t => {
-      document.body.setAttribute('data-theme', t);
-      document.documentElement.setAttribute('data-theme', t);
-      localStorage.setItem('theme', t);
-      if (themeToggle) themeToggle.checked = t === 'dark';
-      if (sbThemeIcon) sbThemeIcon.className = t === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-    };
-    applyTheme(localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light'));
-    themeToggle?.addEventListener('change', () => applyTheme(themeToggle.checked ? 'dark' : 'light'));
-    sbThemeBtn?.addEventListener('click', () => applyTheme(document.body.getAttribute('data-theme') !== 'dark' ? 'dark' : 'light'));
-
-    // ── MOBILE SIDEBAR ──
-    const menuBtn    = document.getElementById('mobileMenuBtn');
-    const sidebar    = document.getElementById('mobileSidebar');
-    const backdrop   = document.getElementById('sidebarBackdrop');
-    const closeBtn   = document.getElementById('sidebarCloseBtn');
-    const openSidebar = () => {
-      if (!sidebar || !backdrop || !menuBtn) return;
-      sidebar.classList.add('open');
-      sidebar.setAttribute('aria-hidden', 'false');
-      backdrop.classList.add('open');
-      menuBtn.setAttribute('aria-expanded', 'true');
-      document.body.style.overflow = 'hidden';
-    };
-    const closeSidebar = () => {
-      if (!sidebar || !backdrop || !menuBtn) return;
-      sidebar.classList.remove('open');
-      sidebar.setAttribute('aria-hidden', 'true');
-      backdrop.classList.remove('open');
-      menuBtn.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
-    };
-    menuBtn?.addEventListener('click', openSidebar);
-    closeBtn?.addEventListener('click', closeSidebar);
-    backdrop?.addEventListener('click', closeSidebar);
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSidebar(); });
-    sidebar?.querySelectorAll('.sidebar-link').forEach(l => l.addEventListener('click', closeSidebar));
+    // Nav, theme, header, sidebar, footer handled by app.js
 
     // ── GALLERY DATA ──
     const items = [

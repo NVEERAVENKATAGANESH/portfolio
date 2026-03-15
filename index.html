@@ -68,81 +68,10 @@
 </head>
 <body><script>(function(){var t=document.documentElement.getAttribute('data-theme');if(t)document.body.setAttribute('data-theme',t);})()</script>
 
-<!-- Skip navigation for keyboard users -->
-<a href="#main-content" class="skip-link">Skip to main content</a>
-
 <canvas id="galaxyCanvas" aria-hidden="true"></canvas>
 <div id="scrollBar" role="progressbar" aria-hidden="true"></div>
-
-<!-- HEADER -->
-<header id="site-header" role="banner">
-  <div class="header-inner">
-    <a href="#home" class="header-brand" aria-label="Go to top">
-      <span class="header-name">Ganesh</span><span class="header-dot" aria-hidden="true">.</span>
-    </a>
-    <nav class="header-nav" aria-label="Primary navigation">
-      <a href="#home"         class="header-link" aria-label="Home"><i class="fas fa-home" aria-hidden="true"></i><span>Home</span></a>
-      <a href="#about"        class="header-link" aria-label="About"><i class="fas fa-user" aria-hidden="true"></i><span>About</span></a>
-      <a href="#timeline"     class="header-link" aria-label="Journey"><i class="fas fa-route" aria-hidden="true"></i><span>Journey</span></a>
-      <a href="#skills"       class="header-link" aria-label="Skills"><i class="fas fa-code" aria-hidden="true"></i><span>Skills</span></a>
-      <a href="#projects"     class="header-link" aria-label="Projects"><i class="fas fa-folder-open" aria-hidden="true"></i><span>Projects</span></a>
-      <a href="#achievements" class="header-link" aria-label="Achievements"><i class="fas fa-award" aria-hidden="true"></i><span>Achievements</span></a>
-      <a href="#testimonials" class="header-link" aria-label="Testimonials"><i class="fas fa-quote-left" aria-hidden="true"></i><span>Testimonials</span></a>
-      <a href="#gallery"      class="header-link" aria-label="Gallery"><i class="fas fa-images" aria-hidden="true"></i><span>Gallery</span></a>
-      <a href="#contact"      class="header-link" aria-label="Contact"><i class="fas fa-envelope" aria-hidden="true"></i><span>Contact</span></a>
-      <a href="#resume"       class="header-link" aria-label="Resume"><i class="fas fa-file-alt" aria-hidden="true"></i><span>Resume</span></a>
-    </nav>
-    <div class="header-controls">
-      <a href="https://www.linkedin.com/in/veera-venkata-ganesh-nurukurthi-437195226/" target="_blank" rel="noopener noreferrer" class="header-icon-btn" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
-      <a href="https://github.com/NVEERAVENKATAGANESH" target="_blank" rel="noopener noreferrer" class="header-icon-btn" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
-      <a href="https://22nd.aaruush.org" target="_blank" rel="noopener noreferrer" class="header-icon-btn header-icon-btn--aaruush" aria-label="Aaruush"><img src="images/Aaruush-logo.png" alt="Aaruush" width="22" height="22"/></a>
-      <label class="header-theme-switch" aria-label="Toggle dark/light theme">
-        <input type="checkbox" id="theme-toggle"/>
-        <span class="header-slider"><span class="header-slider-thumb"></span></span>
-      </label>
-      <button class="header-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileSidebar">
-        <span class="hb-bar hb-top" aria-hidden="true"></span>
-        <span class="hb-bar hb-mid" aria-hidden="true"></span>
-        <span class="hb-bar hb-bot" aria-hidden="true"></span>
-      </button>
-    </div>
-  </div>
-</header>
-
-<!-- MOBILE SIDEBAR (visible only on ≤768px) -->
-<div id="sidebarBackdrop" class="sidebar-backdrop" aria-hidden="true"></div>
-<aside id="mobileSidebar" class="mobile-sidebar" aria-label="Mobile navigation" aria-hidden="true">
-  <div class="sidebar-header">
-    <a href="#home" class="sidebar-brand" aria-label="Go to top">
-      <span class="sidebar-brand-name">Ganesh</span><span class="sidebar-brand-dot" aria-hidden="true">.</span>
-    </a>
-    <button type="button" id="sidebarThemeToggle" class="sidebar-theme-btn" aria-label="Toggle theme">
-      <i class="fas fa-moon" id="sidebarThemeIcon" aria-hidden="true"></i>
-    </button>
-    <button type="button" id="sidebarCloseBtn" class="sidebar-close-btn" aria-label="Close menu">
-      <i class="fas fa-times" aria-hidden="true"></i>
-    </button>
-  </div>
-  <nav class="sidebar-nav" aria-label="Sidebar navigation">
-    <a href="#home"         class="sidebar-link"><i class="fas fa-home" aria-hidden="true"></i><span>Home</span></a>
-    <a href="#about"        class="sidebar-link"><i class="fas fa-user" aria-hidden="true"></i><span>About</span></a>
-    <a href="#timeline"     class="sidebar-link"><i class="fas fa-route" aria-hidden="true"></i><span>Journey</span></a>
-    <a href="#skills"       class="sidebar-link"><i class="fas fa-code" aria-hidden="true"></i><span>Skills</span></a>
-    <a href="#projects"     class="sidebar-link"><i class="fas fa-folder-open" aria-hidden="true"></i><span>Projects</span></a>
-    <a href="#achievements" class="sidebar-link"><i class="fas fa-award" aria-hidden="true"></i><span>Achievements</span></a>
-    <a href="#testimonials" class="sidebar-link"><i class="fas fa-quote-left" aria-hidden="true"></i><span>Testimonials</span></a>
-    <a href="#gallery"      class="sidebar-link"><i class="fas fa-images" aria-hidden="true"></i><span>Gallery</span></a>
-    <a href="#contact"      class="sidebar-link"><i class="fas fa-envelope" aria-hidden="true"></i><span>Contact</span></a>
-    <a href="#resume"       class="sidebar-link"><i class="fas fa-file-alt" aria-hidden="true"></i><span>Resume</span></a>
-    <div class="sidebar-divider" aria-hidden="true"></div>
-    <div class="sidebar-socials">
-      <a href="https://www.linkedin.com/in/veera-venkata-ganesh-nurukurthi-437195226/" target="_blank" rel="noopener noreferrer" class="sidebar-social-link" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i><span>LinkedIn</span></a>
-      <a href="https://github.com/NVEERAVENKATAGANESH" target="_blank" rel="noopener noreferrer" class="sidebar-social-link" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i><span>GitHub</span></a>
-      <a href="mailto:nveeravenkataganesh@gmail.com" class="sidebar-social-link" aria-label="Email"><i class="fas fa-envelope" aria-hidden="true"></i><span>Email</span></a>
-      <a href="https://22nd.aaruush.org" target="_blank" rel="noopener noreferrer" class="sidebar-social-link" aria-label="Aaruush"><img src="images/Aaruush-logo.png" alt="" aria-hidden="true" width="30" height="30"/><span>Aaruush</span></a>
-    </div>
-  </nav>
-</aside>
+<!-- nav injected by buildNav() in app.js — edit nav links/structure there -->
+<div id="nav-root"></div>
 
 <main id="main-content">
 
