@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Gallery — Veera Venkata Ganesh Nurukurthi. Photos and videos from events, hackathons, and experiences." />
   <title>Gallery — Veera Venkata Ganesh Nurukurthi</title>
-  <link rel="canonical" href="gallery.html"/>
+  <link rel="canonical" href="https://nveeravenkataganesh.github.io/gallery.html"/>
 
   <!-- Favicon -->
   <link rel="icon" type="image/jpeg" href="images/Headshot.jpg"/>
@@ -539,7 +539,7 @@
     .mobile-nav-btn:hover, .mobile-nav-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
   </style>
 </head>
-<body>
+<body><script>(function(){var t=document.documentElement.getAttribute('data-theme');if(t)document.body.setAttribute('data-theme',t);})()</script>
 
   <!-- ── HEADER (matches index.html) ── -->
   <header id="site-header" role="banner">
@@ -968,11 +968,14 @@
     const lbCounter = document.getElementById('lbCounter');
     let lbIndex = 0;
 
+    let _lbOpener = null;
     function openLightbox(idx) {
+      _lbOpener = document.activeElement;
       lbIndex = idx;
       renderLightbox();
       lightbox.classList.add('open');
       document.body.style.overflow = 'hidden';
+      document.getElementById('lbClose')?.focus({ preventScroll: true });
     }
 
     function closeLightbox() {
@@ -981,6 +984,8 @@
       if (v) v.pause();
       lightbox.classList.remove('open');
       document.body.style.overflow = '';
+      _lbOpener?.focus();
+      _lbOpener = null;
     }
 
     function renderLightbox() {
@@ -1013,9 +1018,18 @@
     }
 
     document.getElementById('lbClose').addEventListener('click', closeLightbox);
-    document.getElementById('lbPrev').addEventListener('click', () => { lbIndex--; renderLightbox(); currentIndex = lbIndex; showPreview(true); });
-    document.getElementById('lbNext').addEventListener('click', () => { lbIndex++; renderLightbox(); currentIndex = lbIndex; showPreview(true); });
+    document.getElementById('lbPrev').addEventListener('click', () => { const list=filtered(); lbIndex=Math.max(0,lbIndex-1); renderLightbox(); currentIndex=lbIndex; showPreview(true); });
+    document.getElementById('lbNext').addEventListener('click', () => { const list=filtered(); lbIndex=Math.min(list.length-1,lbIndex+1); renderLightbox(); currentIndex=lbIndex; showPreview(true); });
     lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+    // Focus trap — keep keyboard focus inside lightbox while open
+    lightbox.addEventListener('keydown', e => {
+      if (e.key !== 'Tab' || !lightbox.classList.contains('open')) return;
+      const focusable = Array.from(lightbox.querySelectorAll('button:not([disabled]),a[href],[tabindex="0"]')).filter(el => el.offsetParent !== null);
+      if (!focusable.length) return;
+      const first = focusable[0], last = focusable[focusable.length - 1];
+      if (e.shiftKey) { if (document.activeElement === first) { e.preventDefault(); last.focus(); } }
+      else            { if (document.activeElement === last)  { e.preventDefault(); first.focus(); } }
+    });
 
     // ── FULLSCREEN ──
     function toggleFullscreen() {
@@ -1035,7 +1049,8 @@
 
     // ── PREV / NEXT ──
     function navigate(dir) {
-      currentIndex += dir;
+      const list = filtered();
+      currentIndex = Math.max(0, Math.min(list.length - 1, currentIndex + dir));
       showPreview();
       if (slideshowOn) resetSlideshowTimer();
     }

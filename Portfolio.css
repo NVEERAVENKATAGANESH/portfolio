@@ -813,6 +813,8 @@ body.cert-modal-open{overflow:hidden}
 :focus-visible{outline:2px solid var(--primary);outline-offset:3px;border-radius:3px;}
 a:focus-visible,button:focus-visible{border-radius:4px;}
 .skill-card:focus-visible,.timeline-item:focus-visible{outline-offset:4px;}
+/* Touch devices: suppress focus rings that flash after tap — not useful without keyboard */
+@media(hover:none) and (pointer:coarse){:focus-visible{outline:none;}}
 
 /* ══ PREFERS-REDUCED-MOTION ══ */
 @media(prefers-reduced-motion:reduce){

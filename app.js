@@ -12,6 +12,7 @@ let _galaxyCtrl = null; // controlled by initTheme after initGalaxy runs
 
 /* ── 1. GALAXY ── */
 function initGalaxy() {
+  if (reducedMotion) return; // skip all canvas animation for vestibular-disorder users
   const canvas = document.getElementById('galaxyCanvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
@@ -21,7 +22,7 @@ function initGalaxy() {
 
   function resize(){ W=canvas.width=window.innerWidth; H=canvas.height=window.innerHeight; }
   resize();
-  window.addEventListener('resize', debounce(()=>{ resize(); build(); }, 250));
+  window.addEventListener('resize', debounce(resize, 250)); // resize canvas only — no need to rebuild stars on every resize
 
   function build(){
     // More stars, each with autonomous drift velocity for a "flying through space" feel
@@ -348,7 +349,7 @@ function initHeader(){
   function trapFocus(e){
     if(!sidebar?.classList.contains('open')) return;
     const focusable = Array.from(sidebar.querySelectorAll('a[href],button:not([disabled]),[tabindex="0"]')).filter(el=>el.offsetParent!==null);
-    if(!focusable.length) return;
+    if(!focusable.length){ sidebar.setAttribute('tabindex','-1'); sidebar.focus(); return; }
     const first=focusable[0], last=focusable[focusable.length-1];
     if(e.key==='Tab'){
       if(e.shiftKey){ if(document.activeElement===first){e.preventDefault();last.focus();} }
@@ -490,22 +491,22 @@ function initProjectFilter(){
   if(!search||!filter||!sort||!cont||!noMsg) return;
   const cards=Array.from(document.querySelectorAll('.project-card'));
   function apply(){
-    const term=search.value.trim().toLowerCase(), cat=filter.value; let vis=0;
-    cards.forEach(c=>{
-      const title=(c.querySelector('.card-title')?.textContent??'').toLowerCase();
-      const desc=(c.querySelector('.card-text')?.textContent??'').toLowerCase();
-      const ok=(!term||title.includes(term)||desc.includes(term))&&(cat==='all'||c.dataset.category===cat);
+    const term=search.value.trim().toLowerCase(), cat=filter.value;
+    const getTitle=c=>(c.querySelector('.card-title')?.textContent||'');
+    // Sort first so DOM order always reflects active sort, then apply filter visibility
+    const sorted=[...cards];
+    if(sort.value==='az') sorted.sort((a,b)=>getTitle(a).localeCompare(getTitle(b)));
+    if(sort.value==='za') sorted.sort((a,b)=>getTitle(b).localeCompare(getTitle(a)));
+    const frag=document.createDocumentFragment();
+    let vis=0;
+    sorted.forEach(c=>{
+      const t=(c.querySelector('.card-title')?.textContent??'').toLowerCase();
+      const d=(c.querySelector('.card-text')?.textContent??'').toLowerCase();
+      const ok=(!term||t.includes(term)||d.includes(term))&&(cat==='all'||c.dataset.category===cat);
       c.style.display=ok?'':'none'; vis+=ok?1:0;
+      frag.appendChild(c);
     });
-    const visible=cards.filter(c=>c.style.display!=='none');
-    const title=c=>(c.querySelector('.card-title')?.textContent||'');
-    if(sort.value==='az') visible.sort((a,b)=>title(a).localeCompare(title(b)));
-    if(sort.value==='za') visible.sort((a,b)=>title(b).localeCompare(title(a)));
-    if(sort.value!=='none'){
-      const frag=document.createDocumentFragment();
-      visible.forEach(c=>frag.appendChild(c));
-      cont.appendChild(frag);
-    }
+    cont.appendChild(frag);
     noMsg.classList.toggle('d-none',vis>0);
   }
   search.addEventListener('input',debounce(apply,100));
@@ -536,14 +537,22 @@ function initCertModal(){
     }
   };
 
+  let _certOpener = null;
+  let _clearTid = null;
   function closeAll(){
+    clearTimeout(_clearTid); // cancel any stale content-clear that could wipe a freshly opened modal
     Object.values(MODALS).forEach(m => {
       if (!m.modal) return;
       m.modal.classList.remove('is-open');
       m.modal.setAttribute('aria-hidden', 'true');
-      setTimeout(() => { if (m.contentEl) m.contentEl.innerHTML = ''; }, 250);
     });
     document.body.classList.remove('cert-modal-open');
+    const opener = _certOpener;
+    _certOpener = null;
+    _clearTid = setTimeout(() => {
+      Object.values(MODALS).forEach(m => { if (m.contentEl) m.contentEl.innerHTML = ''; });
+      opener?.focus(); // return focus to the trigger after animation completes
+    }, 250);
   }
 
   // Close buttons inside modals
@@ -599,22 +608,42 @@ function initCertModal(){
         obj.type = 'application/pdf';
         obj.style.cssText = 'width:100%;height:520px;border:none;border-radius:0.75rem;background:#fff;display:block;';
         obj.setAttribute('aria-label', certName);
-        obj.innerHTML = `<div class="cert-error"><i class="fas fa-file-pdf"></i><p>PDF preview not available in this browser.</p><a href="${certPath}" target="_blank" rel="noopener" class="btn btn-primary btn-sm"><i class="fas fa-external-link-alt me-1"></i>Open PDF</a></div>`;
+        // Build fallback via DOM — no innerHTML with user-derived paths
+        const fb = document.createElement('div'); fb.className = 'cert-error';
+        const fbI = document.createElement('i'); fbI.className = 'fas fa-file-pdf'; fbI.setAttribute('aria-hidden','true');
+        const fbP = document.createElement('p'); fbP.textContent = 'PDF preview not available in this browser.';
+        const fbA = document.createElement('a'); fbA.href = certPath; fbA.target = '_blank'; fbA.rel = 'noopener'; fbA.className = 'btn btn-primary btn-sm';
+        const fbAI = document.createElement('i'); fbAI.className = 'fas fa-external-link-alt me-1'; fbAI.setAttribute('aria-hidden','true');
+        fbA.appendChild(fbAI); fbA.appendChild(document.createTextNode('Open PDF'));
+        fb.appendChild(fbI); fb.appendChild(fbP); fb.appendChild(fbA);
+        obj.appendChild(fb);
         m.contentEl.appendChild(obj);
       } else {
         const img = new Image();
         img.alt = certName;
         img.style.cssText = 'width:100%;border-radius:0.75rem;display:none;';
         img.onload  = () => { m.contentEl.innerHTML = ''; img.style.display = 'block'; m.contentEl.appendChild(img); };
-        img.onerror = () => { m.contentEl.innerHTML = `<div class="cert-error"><i class="fas fa-exclamation-circle"></i><p>Could not load preview.</p><a href="${certPath}" target="_blank" rel="noopener" class="btn btn-outline-primary btn-sm"><i class="fas fa-external-link-alt me-1"></i>Open directly</a></div>`; };
+        img.onerror = () => {
+          // Build error via DOM — no innerHTML with user-derived paths
+          const er = document.createElement('div'); er.className = 'cert-error';
+          const erI = document.createElement('i'); erI.className = 'fas fa-exclamation-circle'; erI.setAttribute('aria-hidden','true');
+          const erP = document.createElement('p'); erP.textContent = 'Could not load preview.';
+          const erA = document.createElement('a'); erA.href = certPath; erA.target = '_blank'; erA.rel = 'noopener'; erA.className = 'btn btn-outline-primary btn-sm';
+          const erAI = document.createElement('i'); erAI.className = 'fas fa-external-link-alt me-1'; erAI.setAttribute('aria-hidden','true');
+          erA.appendChild(erAI); erA.appendChild(document.createTextNode('Open directly'));
+          er.appendChild(erI); er.appendChild(erP); er.appendChild(erA);
+          m.contentEl.replaceChildren(er);
+        };
         img.src = certPath;
       }
 
+      _certOpener = btn; // track for focus restoration on close
+      clearTimeout(_clearTid); // cancel any pending content-clear from a previous close
       m.modal.classList.add('is-open');
       m.modal.setAttribute('aria-hidden', 'false');
       document.body.classList.add('cert-modal-open');
       const certBox = m.modal.querySelector('.section-cert-modal-box') || m.modal.querySelector('[tabindex="-1"]');
-      if(certBox){ certBox.setAttribute('tabindex','-1'); requestAnimationFrame(()=>requestAnimationFrame(()=>certBox.focus({ preventScroll:true }))); }
+      if(certBox){ certBox.setAttribute('tabindex','-1'); requestAnimationFrame(()=>certBox.focus({ preventScroll:true })); }
     });
   });
 }
@@ -679,6 +708,7 @@ function initProjectModal(){
   const descEl    = document.getElementById('projModalDesc');
   const actionsEl = document.getElementById('projModalActions');
 
+  let _projOpener = null;
   function openModal(card){
     const title   = card.querySelector('.card-title')?.textContent?.trim() || '';
     const tag     = card.querySelector('.project-tag')?.textContent?.trim() || '';
@@ -688,8 +718,10 @@ function initProjectModal(){
     if(titleEl) titleEl.textContent = title;
     if(tagEl)   tagEl.textContent   = tag;
     if(descEl)  descEl.textContent  = desc;
-    if(actionsEl && actions) actionsEl.innerHTML = actions.innerHTML;
+    // Clone DOM nodes instead of copying innerHTML to avoid any XSS risk
+    if(actionsEl && actions) actionsEl.replaceChildren(...Array.from(actions.cloneNode(true).childNodes));
 
+    _projOpener = document.activeElement;
     modal.classList.add('is-open');
     modal.setAttribute('aria-hidden','false');
     closeBtn?.focus({ preventScroll: true });
@@ -697,6 +729,8 @@ function initProjectModal(){
   function closeModal(){
     modal.classList.remove('is-open');
     modal.setAttribute('aria-hidden','true');
+    _projOpener?.focus();
+    _projOpener = null;
   }
 
   closeBtn?.addEventListener('click', closeModal);
