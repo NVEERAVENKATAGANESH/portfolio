@@ -86,11 +86,39 @@ body[data-theme="dark"] #site-header{box-shadow:0 2px 20px rgba(0,0,0,.4)}
 .header-theme-switch input:checked+.header-slider .header-slider-thumb{transform:translateX(20px)}
 .header-slider::before{content:"🌙";position:absolute;right:4px;top:50%;transform:translateY(-50%);font-size:11px;pointer-events:none;}
 .header-theme-switch input:checked+.header-slider::before{content:"☀️";right:auto;left:4px;}
-.header-menu-btn{display:none;align-items:center;justify-content:center;width:36px;height:36px;background:none;border:1px solid var(--border);border-radius:8px;cursor:pointer;padding:0;color:var(--text-dark);font-size:1rem;transition:color var(--t),border-color var(--t),background var(--t);}
-.header-menu-btn:hover{color:var(--primary);border-color:var(--primary);background:rgba(79,70,229,.08);}
-.header-menu-icon-close{display:none;}
-.header-menu-btn[aria-expanded="true"] .header-menu-icon{display:none;}
-.header-menu-btn[aria-expanded="true"] .header-menu-icon-close{display:block;}
+/* ── Hamburger button ── */
+.header-menu-btn{
+  display:none;flex-direction:column;align-items:center;justify-content:center;gap:5px;
+  width:40px;height:40px;padding:0;
+  background:rgba(79,70,229,.08);
+  border:1.5px solid rgba(79,70,229,.3);
+  border-radius:10px;cursor:pointer;
+  transition:background var(--t),border-color var(--t),transform .15s ease;
+  position:relative;overflow:hidden;
+}
+.header-menu-btn::before{
+  content:'';position:absolute;inset:0;border-radius:10px;
+  background:var(--primary-gradient);opacity:0;
+  transition:opacity var(--t);
+}
+.header-menu-btn:hover{border-color:var(--primary);transform:scale(1.05);}
+.header-menu-btn:hover::before{opacity:.12;}
+.header-menu-btn:active{transform:scale(.95);}
+
+.hb-bar{
+  display:block;width:18px;height:2px;
+  background:var(--primary);
+  border-radius:2px;
+  transform-origin:center;
+  transition:transform .3s cubic-bezier(.4,0,.2,1),
+             opacity   .2s ease,
+             width     .3s cubic-bezier(.4,0,.2,1);
+  position:relative;z-index:1;
+}
+/* Open state — morph to X */
+.header-menu-btn[aria-expanded="true"] .hb-top{transform:translateY(7px) rotate(45deg);}
+.header-menu-btn[aria-expanded="true"] .hb-mid{opacity:0;width:0;}
+.header-menu-btn[aria-expanded="true"] .hb-bot{transform:translateY(-7px) rotate(-45deg);}
 @media(max-width:1100px){.header-link span{display:none}.header-link{padding:.35rem .5rem}}
 @media(max-width:768px){
   .header-inner{height:48px;padding:0 .6rem;gap:.2rem;}
