@@ -564,7 +564,9 @@
           <span class="header-slider"><span class="header-slider-thumb"></span></span>
         </label>
         <button type="button" class="header-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileSidebar">
-          <span class="menu-bar" aria-hidden="true"></span><span class="menu-bar" aria-hidden="true"></span><span class="menu-bar" aria-hidden="true"></span>
+          <span class="hb-bar hb-top" aria-hidden="true"></span>
+          <span class="hb-bar hb-mid" aria-hidden="true"></span>
+          <span class="hb-bar hb-bot" aria-hidden="true"></span>
         </button>
       </div>
     </div>
@@ -577,6 +579,9 @@
       <a href="index.html" class="sidebar-brand" aria-label="Back to portfolio">
         <span class="sidebar-brand-name">Ganesh</span><span class="sidebar-brand-dot" aria-hidden="true">.</span>
       </a>
+      <button type="button" id="sidebarThemeToggle" class="sidebar-theme-btn" aria-label="Toggle theme">
+        <i class="fas fa-moon" id="sidebarThemeIcon" aria-hidden="true"></i>
+      </button>
       <button type="button" id="sidebarCloseBtn" class="sidebar-close-btn" aria-label="Close menu">
         <i class="fas fa-times" aria-hidden="true"></i>
       </button>
@@ -686,15 +691,19 @@
     if (footerYear) footerYear.textContent = new Date().getFullYear();
 
     // ── THEME — matches index.html (syncs body + documentElement) ──
-    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggle   = document.getElementById('theme-toggle');
+    const sbThemeBtn    = document.getElementById('sidebarThemeToggle');
+    const sbThemeIcon   = document.getElementById('sidebarThemeIcon');
     const applyTheme  = t => {
       document.body.setAttribute('data-theme', t);
       document.documentElement.setAttribute('data-theme', t);
       localStorage.setItem('theme', t);
       if (themeToggle) themeToggle.checked = t === 'dark';
+      if (sbThemeIcon) sbThemeIcon.className = t === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
     };
     applyTheme(localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light'));
     themeToggle?.addEventListener('change', () => applyTheme(themeToggle.checked ? 'dark' : 'light'));
+    sbThemeBtn?.addEventListener('click', () => applyTheme(document.body.getAttribute('data-theme') !== 'dark' ? 'dark' : 'light'));
 
     // ── MOBILE SIDEBAR ──
     const menuBtn    = document.getElementById('mobileMenuBtn');

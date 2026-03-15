@@ -1678,6 +1678,18 @@ function initMagneticIcons(){
   });
 }
 
+/* ── TESTIMONIAL CARD SPOTLIGHT ── */
+function initTestimonialSpotlight(){
+  if(IS_TOUCH) return;
+  document.querySelectorAll('.testimonial-card').forEach(card=>{
+    card.addEventListener('mousemove',e=>{
+      const r=card.getBoundingClientRect();
+      card.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');
+      card.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%');
+    },{passive:true});
+  });
+}
+
 /* ── CURSOR GLOW ── */
 function initCursorGlow(){
   if(IS_TOUCH) return;
@@ -1740,6 +1752,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initHireBanner();
   initCopyEmail();
   initTestimonialsCarousel();
+  initTestimonialSpotlight();
   initStatCounters();
   initHashSync();
   initProjectCardTilt();
