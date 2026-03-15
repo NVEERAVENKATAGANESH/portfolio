@@ -1,0 +1,15 @@
+{
+  "name": "Veera Venkata Ganesh Nurukurthi",
+  "short_name": "Ganesh",
+  "description": "Full-Stack Developer & AI enthusiast portfolio",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0d16",
+  "theme_color": "#4f46e5",
+  "orientation": "portrait-primary",
+  "icons": [
+    { "src": "images/Headshot.jpg", "sizes": "192x192", "type": "image/jpeg" },
+    { "src": "images/Headshot.jpg", "sizes": "512x512", "type": "image/jpeg" }
+  ],
+  "categories": ["portfolio", "developer", "technology"]
+}

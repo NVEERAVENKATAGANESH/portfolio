@@ -1,94 +1,143 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Gallery – Veera Venkata Ganesh</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Gallery — Veera Venkata Ganesh Nurukurthi. Photos and videos from events, hackathons, and experiences." />
+  <title>Gallery — Veera Venkata Ganesh Nurukurthi</title>
+  <link rel="canonical" href="gallery.html"/>
 
-  <!-- Bootstrap 5 -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
-  <!-- Font Awesome -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
-  <!-- Main CSS -->
-  <link href="Portfolio.css" rel="stylesheet"/>
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpeg" href="images/Headshot.jpg"/>
+  <link rel="apple-touch-icon" href="images/Headshot.jpg"/>
+
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.webmanifest"/>
+  <meta name="theme-color" content="#4f46e5"/>
+
+  <!-- Dark-mode flash prevention — must run before body renders -->
+  <script>(function(){var t=localStorage.getItem('theme');if(t==='dark'||(t===null&&window.matchMedia('(prefers-color-scheme:dark)').matches))document.documentElement.setAttribute('data-theme','dark');})()</script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="Portfolio.css"/>
 
   <style>
-    /* Theme variables */
+    /* ── Gallery-specific tokens (extends Portfolio.css) ── */
     :root {
-      --bg-default: #fff;
-      --text-default: #000;
-      --footer-height: 4rem;
-      --dropdown-bg: #fff;
-      --dropdown-border: #ccc;
-    }
-    html[data-theme="dark"] {
-      --bg-default: #000;
-      --text-default: #fff;
-      --dropdown-bg: #111;
-      --dropdown-border: #444;
+      --footer-h:         4rem;
+      --navbar-h:         56px;
+      --toolbar-h:        44px; /* gallery toolbar height */
     }
 
     body {
-      margin-top: 56px;
-      padding-bottom: var(--footer-height);
-      background-color: var(--bg-default);
-      color: var(--text-default);
+      padding-bottom: calc(var(--footer-h) + var(--toolbar-h));
+      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
     }
 
-    /* Navbar, preview, thumbs, caption */
-    .navbar,
-    #previewContainer,
-    #thumbsContainer,
-    #captionContainer {
-      background-color: var(--bg-default) !important;
-      color: var(--text-default) !important;
+    /* ── Shared header overrides for gallery page ── */
+    #site-header { z-index: 1001; }
+
+    /* View filter pills */
+    .view-pills {
+      display: flex;
+      gap: 0.25rem;
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: 2rem;
+      padding: 3px;
+    }
+    .view-pill {
+      padding: 0.25rem 0.85rem;
+      border-radius: 2rem;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .view-pill.active {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(79,70,229,0.4);
     }
 
-    /* Dropdown menu styling */
-    .dropdown-menu {
-      background-color: var(--dropdown-bg) !important;
-      border: 1px solid var(--dropdown-border) !important;
+    /* ── Toolbar (count + view toggle + slideshow) ── */
+    .gallery-toolbar {
+      background: var(--bg-light);
+      border-bottom: 1px solid var(--border);
+      padding: 0.5rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      transition: background var(--transition);
     }
-    .dropdown-item {
-      color: var(--text-default) !important;
+    .item-counter {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      white-space: nowrap;
     }
-    .dropdown-item:hover, .dropdown-item:focus {
-      background-color: rgba(255,255,255,0.1) !important;
+    .item-counter strong { color: var(--primary); }
+    .toolbar-spacer { flex: 1; }
+    .toolbar-btn {
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 0.5rem;
+      padding: 0.3rem 0.75rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all var(--transition);
     }
-    html[data-theme="dark"] .dropdown-item:hover, html[data-theme="dark"] .dropdown-item:focus {
-      background-color: rgba(255,255,255,0.2) !important;
-    }
+    .toolbar-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .toolbar-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .view-layout-btns { display: flex; gap: 0.25rem; }
 
-    /* Footer styling and sticky behavior */
-    footer {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: var(--footer-height);
-      line-height: var(--footer-height);
-      background-color: var(--bg-default) !important;
-      color: var(--text-default) !important;
-      z-index: 1000;
-      text-align: center;
+    /* ── Keyboard hint ── */
+    .kbd-hint {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
     }
+    kbd {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1px 5px;
+      font-size: 0.72rem;
+      color: var(--text);
+    }
+    @media (max-width: 768px) { .kbd-hint { display: none; } }
 
-    /* Nav links, icons */
-    .navbar .nav-link,
-    .navbar-brand,
-    i {
-      color: var(--text-default) !important;
-    }
-    .navbar-light .navbar-toggler-icon {
-      filter: invert(1);
+    /* ── Split View ── */
+    .split-view {
+      display: flex;
+      height: calc(100vh - var(--navbar-h) - var(--footer-h) - var(--toolbar-h));
+      overflow: hidden;
     }
 
     /* Preview pane */
     #previewContainer {
-      height: calc(100vh - 56px - var(--footer-height));
+      flex: 1;
       display: flex;
       flex-direction: column;
-      border-right: 1px solid var(--text-default);
+      border-right: 1px solid var(--border);
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
+      transition: background var(--transition);
     }
     #previewMedia {
       flex: 1;
@@ -96,209 +145,1033 @@
       justify-content: center;
       align-items: center;
       overflow: hidden;
+      position: relative;
     }
+    #previewMedia img, #previewMedia video {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: 0.5rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    }
+    /* Fade transition for preview */
+    #previewMedia.fading { opacity: 0; transition: opacity 0.18s ease; }
+    #previewMedia.visible { opacity: 1; transition: opacity 0.22s ease; }
+
+    /* Prev / Next overlay arrows */
+    .preview-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(79,70,229,0.85);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 40px; height: 40px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity var(--transition), transform var(--transition);
+      z-index: 10;
+      font-size: 0.9rem;
+    }
+    #previewContainer:hover .preview-nav { opacity: 1; }
+    .preview-nav:hover { transform: translateY(-50%) scale(1.1); }
+    .preview-nav.prev { left: 14px; }
+    .preview-nav.next { right: 14px; }
+
+    /* Caption bar */
     #captionContainer {
-      height: 3rem;
-      padding: 0.5rem 1rem;
+      padding: 0.6rem 4rem;
       text-align: center;
+      font-size: 0.88rem;
       font-style: italic;
-      border-top: 1px solid var(--text-default);
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      min-height: 3rem;
+      transition: background var(--transition);
+    }
+    .caption-counter {
+      background: var(--primary);
+      color: #fff;
+      border-radius: 2rem;
+      padding: 2px 10px;
+      font-size: 0.75rem;
+      font-style: normal;
+      font-weight: 700;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .caption-type-badge {
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      border-radius: 2rem;
+      padding: 2px 10px;
+      font-size: 0.72rem;
+      font-style: normal;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      flex-shrink: 0;
     }
 
-    /* Thumbnails panel */
+    /* ── Thumbnails Panel ── */
     #thumbsContainer {
-      height: calc(100vh - 56px - var(--footer-height));
+      width: 260px;
+      flex-shrink: 0;
       overflow-y: auto;
-      padding: 1rem;
+      padding: 0.75rem;
+      background: var(--bg);
+      transition: background var(--transition);
     }
-    #thumbsContainer::-webkit-scrollbar-thumb {
-      background: var(--text-default);
-    }
-    #thumbsContainer::-webkit-scrollbar-track {
-      background: var(--bg-default);
-    }
+    #thumbsContainer::-webkit-scrollbar { width: 5px; }
+    #thumbsContainer::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    #thumbsContainer::-webkit-scrollbar-track { background: transparent; }
 
-    /* Thumbnail styling */
     .thumb {
       position: relative;
-      margin-bottom: 1rem;
+      margin-bottom: 0.6rem;
       cursor: pointer;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      border: 2px solid transparent;
+      transition: border-color var(--transition), transform var(--transition);
     }
     .thumb img {
       width: 100%;
-      border-radius: .25rem;
-      transition: transform .2s, box-shadow .2s;
+      aspect-ratio: 16/10;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
     }
-    .thumb:hover img {
-      transform: scale(1.03);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-    .thumb .fa-play-circle {
+    .thumb:hover { border-color: var(--accent); transform: translateX(-2px); }
+    .thumb:hover img { transform: scale(1.05); }
+    .thumb.active { border-color: var(--primary); box-shadow: 0 0 0 2px rgba(79,70,229,0.25); }
+    .thumb:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+    .thumb .play-icon {
       position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 2rem;
-      pointer-events: none;
-      color: var(--text-default) !important;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.3);
     }
-    .thumb.active img {
-      box-shadow: 0 0 0 3px var(--bs-primary);
+    .thumb .play-icon i { font-size: 1.8rem; color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
+    .thumb .thumb-label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+      color: #fff;
+      font-size: 0.7rem;
+      padding: 0.5rem 0.4rem 0.3rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+    .thumb:hover .thumb-label { opacity: 1; }
+
+    /* ── Grid View ── */
+    #gridView {
+      display: none;
+      padding: 1rem 1.25rem;
+      overflow-y: auto;
+      height: calc(100vh - var(--navbar-h) - var(--footer-h) - var(--toolbar-h));
+    }
+    #gridView.active { display: block; }
+    .split-view.grid-mode { display: none; }
+    .grid-masonry {
+      columns: 4 200px;
+      gap: 0.75rem;
+    }
+    .grid-item {
+      break-inside: avoid;
+      margin-bottom: 0.75rem;
+      border-radius: 0.6rem;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      border: 2px solid transparent;
+      transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+    }
+    .grid-item img, .grid-item video {
+      width: 100%;
+      display: block;
+      border-radius: 0.5rem;
+    }
+    .grid-item:hover {
+      border-color: var(--primary);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(79,70,229,0.2);
+    }
+    .grid-item:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+    .grid-item .grid-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(79,70,229,0.75);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.3rem;
+      opacity: 0;
+      transition: opacity var(--transition);
+      border-radius: 0.5rem;
+    }
+    .grid-item:hover .grid-overlay { opacity: 1; }
+    .grid-overlay i { color: #fff; font-size: 1.6rem; }
+    .grid-overlay span { color: #fff; font-size: 0.8rem; font-weight: 600; text-align: center; padding: 0 0.5rem; }
+
+    /* ── Lightbox ── */
+    #lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 9999;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      animation: lbIn 0.22s ease;
+    }
+    #lightbox.open { display: flex; }
+    @keyframes lbIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    #lightbox img, #lightbox video {
+      max-width: min(90vw, 1200px);
+      max-height: 80vh;
+      object-fit: contain;
+      border-radius: 0.75rem;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    }
+    .lb-caption {
+      color: #e2e8f0;
+      margin-top: 1rem;
+      font-size: 0.95rem;
+      font-style: italic;
+      text-align: center;
+    }
+    .lb-close {
+      position: absolute;
+      top: 1rem; right: 1.25rem;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      border-radius: 50%;
+      width: 42px; height: 42px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: all var(--transition);
+    }
+    .lb-close:hover { background: #ef4444; border-color: #ef4444; transform: rotate(90deg); }
+    .lb-nav {
+      position: absolute;
+      top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      border-radius: 50%;
+      width: 48px; height: 48px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: all var(--transition);
+    }
+    .lb-nav:hover { background: var(--primary); border-color: var(--primary); }
+    .lb-prev { left: 1rem; }
+    .lb-next { right: 1rem; }
+    .lb-counter {
+      position: absolute;
+      top: 1rem; left: 50%; transform: translateX(-50%);
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      border-radius: 2rem;
+      padding: 0.25rem 1rem;
+      font-size: 0.82rem;
+      font-weight: 600;
     }
 
-    /* Responsive stack */
-    @media (max-width: 991.98px) {
-      .container-fluid .row {
-        flex-direction: column;
-      }
-      #previewContainer,
-      #thumbsContainer {
-        height: auto;
-      }
-      #previewContainer {
-        border-right: none;
-        border-bottom: 1px solid var(--text-default);
-      }
+    /* ── Slideshow controls ── */
+    .slideshow-progress {
+      position: absolute;
+      bottom: 0; left: 0;
+      height: 3px;
+      background: var(--primary-gradient);
+      transition: width 0.1s linear;
+      border-radius: 0 3px 3px 0;
+      pointer-events: none;
     }
+
+    /* ── Empty state ── */
+    .empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      gap: 0.75rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    .empty-state i { font-size: 3rem; opacity: 0.3; }
+
+    /* ── Skeleton loaders ── */
+    .thumb-skeleton {
+      width: 100%;
+      aspect-ratio: 16/10;
+      background: linear-gradient(90deg, var(--bg-light) 25%, var(--border) 50%, var(--bg-light) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite;
+      border-radius: 0.4rem;
+      margin-bottom: 0.6rem;
+    }
+    @keyframes shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+
+    /* ── Footer ── */
+    footer {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      height: var(--footer-h);
+      z-index: 500;
+    }
+
+    /* ── Error state ── */
+    .preview-error {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-muted);
+    }
+    .preview-error i { font-size: 2.5rem; color: #ef4444; opacity: 0.6; }
+
+    /* ── Responsive ── */
+    @media (max-width: 991px) {
+      #thumbsContainer { display: none; }
+      .split-view { flex-direction: column; height: auto; }
+      #previewContainer { border-right: none; border-bottom: 1px solid var(--border); height: 60vw; min-height: 280px; }
+      #gridView { height: auto; }
+      .grid-masonry { columns: 2 140px; }
+    }
+    @media (max-width: 600px) {
+      .grid-masonry { columns: 2 120px; }
+      .gallery-toolbar { gap: 0.5rem; padding: 0.4rem 0.75rem; }
+    }
+
+    /* ── Autoplay badge on thumbnail ── */
+    .thumb .autoplay-ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 0.4rem;
+      pointer-events: none;
+      border: 2px solid transparent;
+    }
+    .thumb.autoplay-active .autoplay-ring {
+      border-color: #f59e0b;
+      box-shadow: 0 0 0 2px rgba(245,158,11,0.3);
+    }
+
+    .gallery-current-caption { font-size: 0.83rem; color: var(--text-muted); font-style: italic; }
+    .mobile-counter-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 600; }
+
+    /* ── Toast notification ── */
+    #toast {
+      position: fixed;
+      bottom: calc(var(--footer-h) + 1rem);
+      left: 50%; transform: translateX(-50%) translateY(12px);
+      background: #1e2330;
+      color: #e2e8f0;
+      padding: 0.6rem 1.25rem;
+      border-radius: 2rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      z-index: 9000;
+      opacity: 0;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      white-space: nowrap;
+      pointer-events: none;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* ── Mobile bottom bar ── */
+    .mobile-nav-bar {
+      display: none;
+      position: fixed;
+      bottom: var(--footer-h);
+      left: 0; right: 0;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 0.5rem;
+      gap: 0.5rem;
+      z-index: 900;
+      justify-content: center;
+      align-items: center;
+    }
+    @media (max-width: 991px) { .mobile-nav-bar { display: flex; } }
+    .mobile-nav-btn {
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 0.6rem;
+      padding: 0.5rem 1rem;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-weight: 600;
+      transition: all var(--transition);
+    }
+    .mobile-nav-btn:hover, .mobile-nav-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
   </style>
 </head>
 <body>
 
-  <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm">
-    <div class="container-fluid">
-      <a class="navbar-brand fw-bold" href="index.html">Portfolio</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
-              aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="mainNav">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" href="index.html#home"><i class="fas fa-home me-1"></i>Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="gallery.html"><i class="fas fa-images me-1"></i>Gallery</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="viewMenu" role="button"
-               data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="fas fa-filter me-1"></i>View
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="viewMenu">
-              <li><a class="dropdown-item view-item active" data-filter="all" href="#">All</a></li>
-              <li><a class="dropdown-item view-item" data-filter="photo" href="#">Photos</a></li>
-              <li><a class="dropdown-item view-item" data-filter="video" href="#">Videos</a></li>
-            </ul>
-          </li>
-        </ul>
-        <div class="theme-switch form-check form-switch mb-0">
-          <label>
-            <input type="checkbox" id="theme-toggle" class="form-check-input" />
-            <span class="slider"></span>
-          </label>
-        </div>
+  <!-- ── HEADER (matches index.html) ── -->
+  <header id="site-header" role="banner">
+    <div class="header-inner">
+      <a href="index.html" class="header-brand" aria-label="Back to portfolio">
+        <span class="header-name">Ganesh</span><span class="header-dot" aria-hidden="true">.</span>
+      </a>
+      <nav class="header-nav" aria-label="Primary navigation">
+        <a href="index.html#home"         class="header-link"><i class="fas fa-home" aria-hidden="true"></i><span>Home</span></a>
+        <a href="index.html#about"        class="header-link"><i class="fas fa-user" aria-hidden="true"></i><span>About</span></a>
+        <a href="index.html#timeline"     class="header-link"><i class="fas fa-route" aria-hidden="true"></i><span>Journey</span></a>
+        <a href="index.html#skills"       class="header-link"><i class="fas fa-code" aria-hidden="true"></i><span>Skills</span></a>
+        <a href="index.html#projects"     class="header-link"><i class="fas fa-folder-open" aria-hidden="true"></i><span>Projects</span></a>
+        <a href="gallery.html"            class="header-link active-link"><i class="fas fa-images" aria-hidden="true"></i><span>Gallery</span></a>
+        <a href="index.html#contact"      class="header-link"><i class="fas fa-envelope" aria-hidden="true"></i><span>Contact</span></a>
+      </nav>
+      <div class="header-controls">
+        <a href="https://www.linkedin.com/in/veera-venkata-ganesh-nurukurthi-437195226/" target="_blank" rel="noopener noreferrer" class="header-icon-btn" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+        <a href="https://github.com/NVEERAVENKATAGANESH" target="_blank" rel="noopener noreferrer" class="header-icon-btn" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
+        <label class="header-theme-switch" aria-label="Toggle dark/light theme">
+          <input type="checkbox" id="theme-toggle"/>
+          <span class="header-slider"><span class="header-slider-thumb"></span></span>
+        </label>
+        <button type="button" class="header-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileSidebar">
+          <span class="menu-bar" aria-hidden="true"></span><span class="menu-bar" aria-hidden="true"></span><span class="menu-bar" aria-hidden="true"></span>
+        </button>
       </div>
     </div>
-  </nav>
+  </header>
 
-  <!-- SPLIT VIEW -->
-  <div class="container-fluid">
-    <div class="row g-0">
-      <div id="previewContainer" class="col-lg-8">
-        <div id="previewMedia"></div>
-        <div id="captionContainer">Caption will appear here</div>
-      </div>
-      <div id="thumbsContainer" class="col-lg-4"></div>
+  <!-- MOBILE SIDEBAR -->
+  <div id="sidebarBackdrop" class="sidebar-backdrop" aria-hidden="true"></div>
+  <aside id="mobileSidebar" class="mobile-sidebar" aria-label="Mobile navigation" aria-hidden="true">
+    <div class="sidebar-header">
+      <a href="index.html" class="sidebar-brand" aria-label="Back to portfolio">
+        <span class="sidebar-brand-name">Ganesh</span><span class="sidebar-brand-dot" aria-hidden="true">.</span>
+      </a>
+      <button type="button" id="sidebarCloseBtn" class="sidebar-close-btn" aria-label="Close menu">
+        <i class="fas fa-times" aria-hidden="true"></i>
+      </button>
+    </div>
+    <nav class="sidebar-nav" aria-label="Sidebar navigation">
+      <a href="index.html#home"         class="sidebar-link"><i class="fas fa-home" aria-hidden="true"></i><span>Home</span></a>
+      <a href="index.html#about"        class="sidebar-link"><i class="fas fa-user" aria-hidden="true"></i><span>About</span></a>
+      <a href="index.html#timeline"     class="sidebar-link"><i class="fas fa-route" aria-hidden="true"></i><span>Journey</span></a>
+      <a href="index.html#skills"       class="sidebar-link"><i class="fas fa-code" aria-hidden="true"></i><span>Skills</span></a>
+      <a href="index.html#projects"     class="sidebar-link"><i class="fas fa-folder-open" aria-hidden="true"></i><span>Projects</span></a>
+      <a href="gallery.html"            class="sidebar-link"><i class="fas fa-images" aria-hidden="true"></i><span>Gallery</span></a>
+      <a href="index.html#contact"      class="sidebar-link"><i class="fas fa-envelope" aria-hidden="true"></i><span>Contact</span></a>
+    </nav>
+  </aside>
+
+  <h1 class="visually-hidden">Gallery — Photos &amp; Videos</h1>
+
+  <!-- ── TOOLBAR ── -->
+  <div class="gallery-toolbar">
+    <div class="view-pills" id="filterPills" role="group" aria-label="Filter media type">
+      <button type="button" class="view-pill active" data-filter="all">All</button>
+      <button type="button" class="view-pill" data-filter="photo"><i class="fas fa-image" aria-hidden="true"></i> Photos</button>
+      <button type="button" class="view-pill" data-filter="video"><i class="fas fa-video" aria-hidden="true"></i> Videos</button>
+    </div>
+    <span class="item-counter" id="itemCounter">
+      <strong id="visibleCount">0</strong> / <span id="totalCount">0</span> items
+    </span>
+    <span id="currentCaption" class="gallery-current-caption"></span>
+    <div class="toolbar-spacer"></div>
+    <span class="kbd-hint">
+      <kbd>←</kbd><kbd>→</kbd> navigate &nbsp;·&nbsp; <kbd>Space</kbd> play/pause &nbsp;·&nbsp; <kbd>F</kbd> fullscreen
+    </span>
+    <button type="button" class="toolbar-btn" id="slideshowBtn" title="Toggle Slideshow">
+      <i class="fas fa-play"></i> Slideshow
+    </button>
+    <div class="view-layout-btns">
+      <button type="button" class="toolbar-btn active" id="splitBtn" title="Split view" aria-label="Split view">
+        <i class="fas fa-columns"></i>
+      </button>
+      <button type="button" class="toolbar-btn" id="gridBtn" title="Grid view" aria-label="Grid view">
+        <i class="fas fa-th"></i>
+      </button>
     </div>
   </div>
 
-  <!-- FOOTER -->
-  <footer>
-    &copy; 2025 Veera Venkata Ganesh Nurukurthi
+  <!-- ── SPLIT VIEW ── -->
+  <div class="split-view" id="splitView">
+    <div id="previewContainer">
+      <button type="button" class="preview-nav prev" id="prevBtn" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+      <button type="button" class="preview-nav next" id="nextBtn" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
+      <div id="previewMedia" class="visible"></div>
+      <div class="slideshow-progress" id="slideshowProgress"></div>
+      <div id="captionContainer">
+        <span class="caption-counter" id="captionCounter"></span>
+        <span id="captionText">Loading…</span>
+        <span class="caption-type-badge" id="captionType">Photo</span>
+      </div>
+    </div>
+    <div id="thumbsContainer"></div>
+  </div>
+
+  <!-- ── GRID VIEW ── -->
+  <div id="gridView">
+    <div class="grid-masonry" id="gridMasonry"></div>
+  </div>
+
+  <!-- ── LIGHTBOX ── -->
+  <div id="lightbox" role="dialog" aria-modal="true" aria-label="Lightbox viewer">
+    <button type="button" class="lb-close" id="lbClose" aria-label="Close lightbox"><i class="fas fa-times"></i></button>
+    <div class="lb-counter" id="lbCounter"></div>
+    <button type="button" class="lb-nav lb-prev" id="lbPrev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+    <div id="lbContent"></div>
+    <p class="lb-caption" id="lbCaption"></p>
+    <button type="button" class="lb-nav lb-next" id="lbNext" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
+  </div>
+
+  <!-- ── MOBILE NAV ── -->
+  <div class="mobile-nav-bar">
+    <button type="button" class="mobile-nav-btn" id="mobilePrev"><i class="fas fa-chevron-left"></i> Prev</button>
+    <span id="mobileCounter" class="mobile-counter-label"></span>
+    <button type="button" class="mobile-nav-btn" id="mobileNext">Next <i class="fas fa-chevron-right"></i></button>
+    <button type="button" class="mobile-nav-btn" id="mobileFullscreen" aria-label="Toggle fullscreen"><i class="fas fa-expand"></i></button>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <footer role="contentinfo">
+    <div class="container d-flex align-items-center justify-content-between flex-wrap gap-2 py-1">
+      <p class="mb-0 small fw-semibold footer-copy">&copy; <span id="footerYear"></span> Veera Venkata Ganesh Nurukurthi</p>
+      <div class="footer-social d-flex gap-3">
+        <a href="https://www.linkedin.com/in/veera-venkata-ganesh-nurukurthi-437195226/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin fa-lg"></i></a>
+        <a href="https://github.com/NVEERAVENKATAGANESH" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github fa-lg"></i></a>
+        <a href="mailto:nveeravenkataganesh@gmail.com" aria-label="Email"><i class="fas fa-envelope fa-lg"></i></a>
+      </div>
+    </div>
   </footer>
 
-  <!-- SCRIPTS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
-  <script>
-    // Theme toggle
-    document.addEventListener('DOMContentLoaded', () => {
-      const toggle = document.getElementById('theme-toggle');
-      toggle.addEventListener('change', () => {
-        document.documentElement.setAttribute('data-theme', toggle.checked ? 'dark' : 'light');
-      });
-    });
-    // Gallery functionality
-    document.addEventListener('DOMContentLoaded', () => {
-      const items = [
-        { type:'photo', src:'images/Aaruush.jpg', alt:'Core Team of Aaruush' },
-        { type:'photo', src:'images/NASA-SAC.jpg', alt:'NASA Space Apps' },
-        { type:'photo', src:'images/Ganesh.jpg', alt:'Ganesh at Admiration Day' },
-        { type:'photo', src:'images/IMG20220805181152.jpg', alt:'August 15 Event' },
-        { type:'video', src:'images/HACK%20SUMMIT%203.0%20Teaser.mp4', poster:'images/_DSC0024.jpg', alt:'Hacksummit3.0 Teaser' },
-        { type:'video', src:'images/Hack%20Summit%203.0.mp4', poster:'images/Aaruush%2022%20backdrop.png', alt:'Hacksummit3.0 after movie'  }
-      ];
-      let filterType='all', currentIndex=0;
-      const previewMedia=document.getElementById('previewMedia');
-      const captionEl=document.getElementById('captionContainer');
-      const thumbsEl=document.getElementById('thumbsContainer');
-      const viewItems=document.querySelectorAll('.view-item');
+  <!-- ── TOAST ── -->
+  <div id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
 
-      viewItems.forEach(el => el.addEventListener('click', ev => {
-        ev.preventDefault();
-        viewItems.forEach(i=>i.classList.remove('active'));
-        el.classList.add('active');
-        filterType=el.dataset.filter; currentIndex=0;
-        renderThumbnails(); showPreview();
-      }));
-      function filtered(){ return items.filter(i=>filterType==='all'||i.type===filterType); }
-      function showPreview(){
-        previewMedia.innerHTML='';
-        const list=filtered();
-        if(!list.length){ captionEl.textContent='No items to display.'; return; }
-        currentIndex=(currentIndex+list.length)%list.length;
-        const item=list[currentIndex];
-        if(item.type==='photo'){
-          const img=document.createElement('img');
-          img.src=item.src; img.alt=item.alt;
-          img.className='img-fluid rounded shadow';
-          previewMedia.appendChild(img);
-        } else {
-          const vid=document.createElement('video');
-          vid.src=item.src; vid.controls=true;
-          vid.poster=item.poster;
-          vid.className='w-100 rounded shadow';
-          previewMedia.appendChild(vid);
-        }
-        captionEl.textContent=item.alt||'Video Preview';
-        thumbsEl.querySelectorAll('.thumb').forEach(t=>t.classList.remove('active'));
-        const activeThumb=thumbsEl.querySelector(`.thumb[data-idx="${currentIndex}"]`);
-        if(activeThumb) activeThumb.classList.add('active');
-      }
-      function renderThumbnails(){
-        thumbsEl.innerHTML='';
-        filtered().forEach((item,idx)=>{
-          const div=document.createElement('div'); div.className='thumb'; div.dataset.idx=idx;
-          const img=document.createElement('img'); img.loading='lazy';
-          if(item.type==='photo'){ img.src=item.src; img.alt=item.alt; }
-          else{ img.src=item.poster; img.alt='Video thumbnail';
-            const icon=document.createElement('i'); icon.className='fas fa-play-circle'; icon.style.color='var(--text-default)'; div.appendChild(icon);
+  <!-- Scripts (Bootstrap JS not needed on gallery page) -->
+
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+
+    // ── FOOTER YEAR ──
+    const footerYear = document.getElementById('footerYear');
+    if (footerYear) footerYear.textContent = new Date().getFullYear();
+
+    // ── THEME — matches index.html (syncs body + documentElement) ──
+    const themeToggle = document.getElementById('theme-toggle');
+    const applyTheme  = t => {
+      document.body.setAttribute('data-theme', t);
+      document.documentElement.setAttribute('data-theme', t);
+      localStorage.setItem('theme', t);
+      if (themeToggle) themeToggle.checked = t === 'dark';
+    };
+    applyTheme(localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light'));
+    themeToggle?.addEventListener('change', () => applyTheme(themeToggle.checked ? 'dark' : 'light'));
+
+    // ── MOBILE SIDEBAR ──
+    const menuBtn    = document.getElementById('mobileMenuBtn');
+    const sidebar    = document.getElementById('mobileSidebar');
+    const backdrop   = document.getElementById('sidebarBackdrop');
+    const closeBtn   = document.getElementById('sidebarCloseBtn');
+    const openSidebar = () => {
+      if (!sidebar || !backdrop || !menuBtn) return;
+      sidebar.classList.add('open');
+      sidebar.setAttribute('aria-hidden', 'false');
+      backdrop.classList.add('open');
+      menuBtn.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    };
+    const closeSidebar = () => {
+      if (!sidebar || !backdrop || !menuBtn) return;
+      sidebar.classList.remove('open');
+      sidebar.setAttribute('aria-hidden', 'true');
+      backdrop.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    };
+    menuBtn?.addEventListener('click', openSidebar);
+    closeBtn?.addEventListener('click', closeSidebar);
+    backdrop?.addEventListener('click', closeSidebar);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSidebar(); });
+    sidebar?.querySelectorAll('.sidebar-link').forEach(l => l.addEventListener('click', closeSidebar));
+
+    // ── GALLERY DATA ──
+    const items = [
+      { type:'photo', src:'images/Aaruush.jpg',               alt:'Core Team of Aaruush 22' },
+      { type:'photo', src:'images/NASA-SAC.jpg',               alt:'NASA Space Apps Challenge' },
+      { type:'photo', src:'images/Ganesh.jpg',                 alt:'Admiration Day' },
+      { type:'photo', src:'images/IMG20220805181152.jpg',       alt:'August 15 Event' },
+      { type:'video', src:'images/HACK%20SUMMIT%203.0%20Teaser.mp4',
+        poster:'images/_DSC0024.jpg',                          alt:'Hack Summit 3.0 Teaser' },
+      { type:'video', src:'images/Hack%20Summit%203.0.mp4',
+        poster:'images/Aaruush%2022%20backdrop.png',           alt:'Hack Summit 3.0 After Movie' }
+    ];
+
+    // ── STATE ──
+    let filterType        = 'all';
+    let currentIndex      = 0;       // index within filtered list
+    let viewMode          = 'split'; // 'split' | 'grid'
+    let slideshowOn       = false;
+    let slideshowInterval = 4000;    // ms per slide
+    let slideshowElapsed  = 0;
+    let slideshowTick     = null;
+
+    // ── HELPERS ──
+    const filtered = () => items.filter(i => filterType === 'all' || i.type === filterType);
+    const clamp    = (idx, list) => ((idx % list.length) + list.length) % list.length;
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      clearTimeout(t._hide);
+      t._hide = setTimeout(() => t.classList.remove('show'), 2200);
+    }
+
+    // ── COUNTER ELEMENTS ──
+    const visibleCountEl = document.getElementById('visibleCount');
+    const totalCountEl   = document.getElementById('totalCount');
+    const currentCaptionEl = document.getElementById('currentCaption');
+
+    function updateCounters() {
+      const list = filtered();
+      visibleCountEl.textContent = list.length;
+      totalCountEl.textContent   = items.length;
+    }
+
+    // ── RENDER THUMBNAILS ──
+    const thumbsEl = document.getElementById('thumbsContainer');
+
+    function renderThumbnails() {
+      // Show skeletons first
+      thumbsEl.innerHTML = '';
+      const list = filtered();
+      list.forEach((_, i) => {
+        const skel = document.createElement('div');
+        skel.className = 'thumb-skeleton';
+        thumbsEl.appendChild(skel);
+      });
+
+      // Replace with real thumbs after micro delay (simulate lazy)
+      setTimeout(() => {
+        thumbsEl.innerHTML = '';
+        list.forEach((item, idx) => {
+          const div = document.createElement('div');
+          div.className = 'thumb';
+          div.dataset.idx = idx;
+          div.setAttribute('role', 'button');
+          div.setAttribute('tabindex', '0');
+          div.setAttribute('aria-label', item.alt);
+
+          const ring = document.createElement('div');
+          ring.className = 'autoplay-ring';
+          div.appendChild(ring);
+
+          const img = document.createElement('img');
+          img.loading = 'lazy';
+          img.alt = item.alt;
+          img.src = item.type === 'photo' ? item.src : (item.poster || '');
+
+          if (item.type === 'video') {
+            const overlay = document.createElement('div');
+            overlay.className = 'play-icon';
+            overlay.innerHTML = '<i class="fas fa-play-circle" aria-hidden="true"></i>';
+            div.appendChild(overlay);
           }
+
+          // Label
+          const label = document.createElement('div');
+          label.className = 'thumb-label';
+          label.textContent = item.alt;
           div.appendChild(img);
-          div.addEventListener('click',()=>{ currentIndex=idx; showPreview(); });
+          div.appendChild(label);
+
+          // Error fallback
+          img.onerror = () => {
+            img.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="120"><rect fill="%23334155" width="200" height="120"/><text fill="%2394a3b8" font-size="12" x="50%" y="50%" text-anchor="middle" dominant-baseline="middle">No Image</text></svg>';
+          };
+
+          div.addEventListener('click', () => { currentIndex = idx; showPreview(); });
+          div.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); currentIndex = idx; showPreview(); } });
+
           thumbsEl.appendChild(div);
         });
+        highlightThumb();
+      }, 60);
+    }
+
+    function highlightThumb() {
+      thumbsEl.querySelectorAll('.thumb').forEach(t => t.classList.remove('active', 'autoplay-active'));
+      const active = thumbsEl.querySelector(`.thumb[data-idx="${currentIndex}"]`);
+      if (active) {
+        active.classList.add('active');
+        if (slideshowOn) active.classList.add('autoplay-active');
+        active.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }
-      document.addEventListener('keydown', e=>{
-        if(e.key==='ArrowLeft'){ currentIndex--; showPreview(); }
-        if(e.key==='ArrowRight'){ currentIndex++; showPreview(); }
-        if(e.key===' '||e.key==='Spacebar'){
-          e.preventDefault(); const vid=previewMedia.querySelector('video');
-          if(vid) vid.paused?vid.play():vid.pause();
+    }
+
+    // ── SHOW PREVIEW ──
+    const previewMedia   = document.getElementById('previewMedia');
+    const captionCounter = document.getElementById('captionCounter');
+    const captionText    = document.getElementById('captionText');
+    const captionType    = document.getElementById('captionType');
+    const mobileCounter  = document.getElementById('mobileCounter');
+
+    function showPreview(skipFade = false) {
+      const list = filtered();
+      if (!list.length) {
+        previewMedia.innerHTML = '<div class="empty-state"><i class="fas fa-photo-video"></i><span>No items to display</span></div>';
+        captionText.textContent = 'No items';
+        return;
+      }
+
+      currentIndex = clamp(currentIndex, list);
+      const item = list[currentIndex];
+
+      // Pause any playing video first
+      const oldVid = previewMedia.querySelector('video');
+      if (oldVid) oldVid.pause();
+
+      const doRender = () => {
+        previewMedia.innerHTML = '';
+        if (item.type === 'photo') {
+          const img = document.createElement('img');
+          img.alt = item.alt;
+          img.src = item.src;
+          img.style.cursor = 'zoom-in';
+          img.onerror = () => {
+            previewMedia.innerHTML = '<div class="preview-error"><i class="fas fa-exclamation-triangle"></i><span>Image failed to load</span></div>';
+          };
+          img.addEventListener('click', () => openLightbox(currentIndex));
+          previewMedia.appendChild(img);
+        } else {
+          const vid = document.createElement('video');
+          vid.src = item.src;
+          vid.controls = true;
+          vid.poster = item.poster || '';
+          vid.preload = 'metadata';
+          vid.onerror = () => {
+            previewMedia.innerHTML = '<div class="preview-error"><i class="fas fa-exclamation-triangle"></i><span>Video failed to load</span></div>';
+          };
+          previewMedia.appendChild(vid);
         }
+        previewMedia.classList.remove('fading');
+        previewMedia.classList.add('visible');
+      };
+
+      if (!skipFade) {
+        previewMedia.classList.remove('visible');
+        previewMedia.classList.add('fading');
+        setTimeout(doRender, 180);
+      } else {
+        doRender();
+      }
+
+      // Update captions
+      const total = list.length;
+      captionCounter.textContent = `${currentIndex + 1} / ${total}`;
+      captionText.textContent    = item.alt || '';
+      captionType.textContent    = item.type === 'video' ? 'Video' : 'Photo';
+      mobileCounter.textContent  = `${currentIndex + 1} / ${total}`;
+      currentCaptionEl.textContent = item.alt;
+
+      highlightThumb();
+
+      // Update grid active (only when grid visible to avoid unnecessary DOM queries)
+      if (viewMode === 'grid') {
+        document.querySelectorAll('.grid-item').forEach(g => g.classList.remove('active'));
+        const gActive = document.querySelector(`.grid-item[data-idx="${currentIndex}"]`);
+        if (gActive) gActive.classList.add('active');
+      }
+    }
+
+    // ── GRID RENDER ──
+    const gridMasonry = document.getElementById('gridMasonry');
+
+    function renderGrid() {
+      gridMasonry.innerHTML = '';
+      filtered().forEach((item, idx) => {
+        const div = document.createElement('div');
+        div.className = 'grid-item';
+        div.dataset.idx = idx;
+        div.setAttribute('role', 'button');
+        div.setAttribute('tabindex', '0');
+        div.setAttribute('aria-label', `Open ${item.alt}`);
+
+        if (item.type === 'photo') {
+          const img = document.createElement('img');
+          img.src = item.src;
+          img.alt = item.alt;
+          img.loading = 'lazy';
+          img.onerror = () => img.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="120"><rect fill="%23334155" width="200" height="120"/></svg>';
+          div.appendChild(img);
+        } else {
+          const img = document.createElement('img');
+          img.src = item.poster || '';
+          img.alt = item.alt;
+          img.loading = 'lazy';
+          div.appendChild(img);
+        }
+
+        const overlay = document.createElement('div');
+        overlay.className = 'grid-overlay';
+        const oi = document.createElement('i');
+        oi.className = `fas fa-${item.type === 'video' ? 'play-circle' : 'expand'}`;
+        oi.setAttribute('aria-hidden', 'true');
+        const os = document.createElement('span');
+        os.textContent = item.alt; // textContent prevents XSS
+        overlay.appendChild(oi);
+        overlay.appendChild(os);
+        div.appendChild(overlay);
+
+        div.addEventListener('click', () => { if (viewMode === 'grid') openLightbox(idx); });
+        div.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(idx); }
+        });
+
+        gridMasonry.appendChild(div);
       });
-      renderThumbnails(); showPreview();
+    }
+
+    // ── LIGHTBOX ──
+    const lightbox  = document.getElementById('lightbox');
+    const lbContent = document.getElementById('lbContent');
+    const lbCaption = document.getElementById('lbCaption');
+    const lbCounter = document.getElementById('lbCounter');
+    let lbIndex = 0;
+
+    function openLightbox(idx) {
+      lbIndex = idx;
+      renderLightbox();
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      // Pause lightbox video if playing
+      const v = lbContent.querySelector('video');
+      if (v) v.pause();
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function renderLightbox() {
+      const list = filtered();
+      if (!list.length) return;
+      lbIndex = clamp(lbIndex, list);
+      const item = list[lbIndex];
+
+      // Pause existing video
+      const oldVid = lbContent.querySelector('video');
+      if (oldVid) oldVid.pause();
+      lbContent.innerHTML = '';
+
+      if (item.type === 'photo') {
+        const img = document.createElement('img');
+        img.src = item.src;
+        img.alt = item.alt;
+        lbContent.appendChild(img);
+      } else {
+        const vid = document.createElement('video');
+        vid.src = item.src;
+        vid.poster = item.poster || '';
+        vid.controls = true;
+        vid.autoplay = true;
+        lbContent.appendChild(vid);
+      }
+
+      lbCaption.textContent = item.alt;
+      lbCounter.textContent = `${lbIndex + 1} / ${list.length}`;
+    }
+
+    document.getElementById('lbClose').addEventListener('click', closeLightbox);
+    document.getElementById('lbPrev').addEventListener('click', () => { lbIndex--; renderLightbox(); currentIndex = lbIndex; showPreview(true); });
+    document.getElementById('lbNext').addEventListener('click', () => { lbIndex++; renderLightbox(); currentIndex = lbIndex; showPreview(true); });
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+
+    // ── FULLSCREEN ──
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        const el = document.getElementById('previewContainer');
+        if (el.requestFullscreen) {
+          el.requestFullscreen().catch(() => showToast('Fullscreen not available'));
+          showToast('Press Esc to exit fullscreen');
+        } else {
+          showToast('Fullscreen not available');
+        }
+      } else {
+        document.exitFullscreen?.();
+      }
+    }
+    document.getElementById('mobileFullscreen').addEventListener('click', toggleFullscreen);
+
+    // ── PREV / NEXT ──
+    function navigate(dir) {
+      currentIndex += dir;
+      showPreview();
+      if (slideshowOn) resetSlideshowTimer();
+    }
+
+    document.getElementById('prevBtn').addEventListener('click', () => navigate(-1));
+    document.getElementById('nextBtn').addEventListener('click', () => navigate(1));
+    document.getElementById('mobilePrev').addEventListener('click', () => navigate(-1));
+    document.getElementById('mobileNext').addEventListener('click', () => navigate(1));
+
+    // ── SWIPE SUPPORT ──
+    let touchStartX = 0, touchStartY = 0;
+    previewMedia.addEventListener('touchstart', e => {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+    previewMedia.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      const dy = e.changedTouches[0].clientY - touchStartY;
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+        navigate(dx < 0 ? 1 : -1);
+      }
+    }, { passive: true });
+
+    // ── KEYBOARD ──
+    document.addEventListener('keydown', e => {
+      // Don't fire if user is typing in an input
+      if (['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName)) return;
+
+      if (e.key === 'ArrowLeft')  { e.preventDefault(); navigate(-1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); navigate(1);  }
+      if (e.key === 'f' || e.key === 'F') toggleFullscreen();
+      if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
+
+      if (e.key === ' ') {
+        e.preventDefault();
+        const vid = previewMedia.querySelector('video');
+        if (vid) {
+          vid.paused ? vid.play() : vid.pause();
+          showToast(vid.paused ? '⏸ Paused' : '▶ Playing');
+        } else {
+          toggleSlideshow();
+        }
+      }
     });
+
+    // ── SLIDESHOW ──
+    const slideshowBtn      = document.getElementById('slideshowBtn');
+    const slideshowProgress = document.getElementById('slideshowProgress');
+
+    function startSlideshowTimer() {
+      clearInterval(slideshowTick); // guard against stacking intervals
+      slideshowElapsed = 0;
+      slideshowProgress.style.width = '0%';
+
+      slideshowTick = setInterval(() => {
+        slideshowElapsed += 100;
+        const pct = Math.min((slideshowElapsed / slideshowInterval) * 100, 100);
+        slideshowProgress.style.width = pct + '%';
+        if (slideshowElapsed >= slideshowInterval) navigate(1);
+      }, 100);
+    }
+
+    function stopSlideshowTimer() {
+      clearInterval(slideshowTick);
+      slideshowProgress.style.width = '0%';
+    }
+
+    function resetSlideshowTimer() {
+      stopSlideshowTimer();
+      if (slideshowOn) startSlideshowTimer();
+    }
+
+    function toggleSlideshow() {
+      slideshowOn = !slideshowOn;
+      if (slideshowOn) {
+        slideshowBtn.innerHTML = '<i class="fas fa-stop"></i> Stop';
+        slideshowBtn.classList.add('active');
+        startSlideshowTimer();
+        showToast('▶ Slideshow started — Space to stop');
+      } else {
+        slideshowBtn.innerHTML = '<i class="fas fa-play"></i> Slideshow';
+        slideshowBtn.classList.remove('active');
+        stopSlideshowTimer();
+        showToast('⏸ Slideshow stopped');
+      }
+      highlightThumb();
+    }
+
+    slideshowBtn.addEventListener('click', toggleSlideshow);
+
+    // ── FILTER ──
+    document.querySelectorAll('.view-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        document.querySelectorAll('.view-pill').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        filterType = pill.dataset.filter;
+        currentIndex = 0;
+        updateCounters();
+        renderThumbnails();
+        renderGrid();
+        showPreview();
+        if (slideshowOn) resetSlideshowTimer();
+      });
+    });
+
+    // ── VIEW MODE TOGGLE ──
+    const splitView = document.getElementById('splitView');
+    const gridView  = document.getElementById('gridView');
+    const splitBtn  = document.getElementById('splitBtn');
+    const gridBtn   = document.getElementById('gridBtn');
+
+    function setViewMode(mode) {
+      viewMode = mode;
+      if (mode === 'split') {
+        splitView.style.display = '';
+        gridView.classList.remove('active');
+        splitBtn.classList.add('active');
+        gridBtn.classList.remove('active');
+      } else {
+        splitView.style.display = 'none';
+        gridView.classList.add('active');
+        splitBtn.classList.remove('active');
+        gridBtn.classList.add('active');
+        renderGrid();
+      }
+    }
+
+    splitBtn.addEventListener('click', () => setViewMode('split'));
+    gridBtn.addEventListener('click',  () => setViewMode('grid'));
+
+    // ── INIT ──
+    updateCounters();
+    renderThumbnails();
+    showPreview(true);
+
+  }); // end DOMContentLoaded
   </script>
 </body>
 </html>
